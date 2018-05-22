@@ -4,9 +4,25 @@ router = module.exports = express.Router();
 
 router.get(/user_(\w+)/, function (req, res) {
 
-    let username = req.url.match(/user_(\w+)/);
+    let match = req.url.match(/user_(\w+)/),
+    username;
 
-    res.render('user', {username: username[0]});
+    if (match) {
+
+        username = match[0].replace(/^user_/,'');
+
+    }
+
+    if (username) {
+
+        res.render('user', {
+            username: username
+        });
+
+    } else {
+
+        res.send('no username!?');
+
+    }
 
 });
-
