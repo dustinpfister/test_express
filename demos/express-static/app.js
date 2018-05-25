@@ -5,7 +5,14 @@ app = express(),
 // getting port this way
 port = process.env.PORT || process.argv[2] || 8080;
 
-app.use('/', express.static('public'));
+// basic use
+//app.use('/', express.static('public'));
+
+// extensions
+// app.use('/', express.static('public',{extensions: ['htm', 'html']}));
+
+// index
+app.use('/', express.static('public',{index:'other.html'}));
 
 app.listen(port, function () {
 
