@@ -9,9 +9,18 @@ port = process.env.PORT || process.argv[2] || 8080;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// set up a static path
+app.use('/static', express.static('public'));
+
 app.get('/', function (req, res) {
 
     res.render('index',{});
+
+});
+
+app.get('*', function(req,res){
+
+    res.render('404',{});
 
 });
 
