@@ -32,7 +32,7 @@ var http = function (argu, done, fail) {
             xhr.setRequestHeader('Content-type', 'application/json');
 
             // custom send that uses JSON
-            argu.send = function (xhr) {
+            argu.send = function (xhr,argu) {
 
                 xhr.send(JSON.stringify(argu.payload));
 
@@ -45,7 +45,7 @@ var http = function (argu, done, fail) {
     };
 
     // given or default send method
-    argu.send = argu.send || function (xhr) {
+    argu.send = argu.send || function (xhr,argu) {
 
         // just send
         xhr.send(argu.payload);
@@ -77,7 +77,7 @@ var http = function (argu, done, fail) {
     // call before send, and send request
     argu.beforeSend(xhr, function () {
 
-        argu.send(xhr);
+        argu.send(xhr,argu);
 
     });
 

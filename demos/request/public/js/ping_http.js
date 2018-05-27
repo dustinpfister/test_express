@@ -11,10 +11,17 @@ g('app_body_send').addEventListener('click', function (e) {
     http({
         url: '/body',
         method: 'POST',
-        payload: {
+        payload: 'foo',
+        beforeSend: function (xhr, next) {
 
-            action: 'foo'
+            xhr.setRequestHeader('Content-type', 'text/plain');
+            next();
 
+        },
+        send: function (xhr, argu) {
+
+            console.log('okay sending now.');
+            xhr.send(argu.payload);
         }
     }, function (res) {
 
@@ -26,3 +33,26 @@ g('app_body_send').addEventListener('click', function (e) {
         function (res) {});
 
 });
+
+/*
+g('app_body_send').addEventListener('click', function (e) {
+
+http({
+url: '/body',
+method: 'POST',
+payload: {
+
+action: 'foo'
+
+}
+}, function (res) {
+
+g('app_out').value += '**********\n'
+g('app_out').value += res + '\n\n';
+
+},
+
+function (res) {});
+
+});
+*/

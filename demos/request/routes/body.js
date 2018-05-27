@@ -5,7 +5,8 @@ bodyParser = require('body-parser'),
 router = module.exports = express.Router();
 
 // using body parser for req.body
-router.use(bodyParser.json());
+//router.use(bodyParser.json());
+router.use(bodyParser.text());
 
 // add body path
 router.post('/', function (req, res) {
@@ -13,8 +14,8 @@ router.post('/', function (req, res) {
     var data = {
         mess: 'what?'
     };
-	
-	console.log(req.body);
+
+    console.log(req.body);
 
     if (req.body) {
 
