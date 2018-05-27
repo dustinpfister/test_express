@@ -1,4 +1,3 @@
-console.log('I am ping');
 
 var g = function (id) {
 
@@ -6,20 +5,16 @@ var g = function (id) {
 
 };
 
-g('app_ping').addEventListener('click', function (e) {
+g('app_body_send').addEventListener('click', function (e) {
 
-    console.log(e);
-
-    axios.post('/req', {
-        action: 'foo'
+    axios.post('/body', {
+        action: g('app_body_text').value
     }).then(function (res) {
 
-        console.log('good');
-        console.log(res.data);
 
         g('app_out').value += '**********\n'
         g('app_out').value += JSON.stringify(res) + '\n\n';
-        g('app_out').value += res.data + '\n\n';
+        g('app_out').value += JSON.stringify(res.data) + '\n\n';
 
     }).catch (function (e) {
 
