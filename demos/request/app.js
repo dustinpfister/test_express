@@ -5,8 +5,8 @@ app = express(),
 // getting port this way
 port = process.env.PORT || process.argv[2] || 8080;
 
-
-app.use('/', express.static('public'));
+// using what is in the routes folder
+app.use('/', require('./routes/static'))
 app.use('/body', require('./routes/body'))
 
 
