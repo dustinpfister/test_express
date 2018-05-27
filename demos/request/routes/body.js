@@ -6,7 +6,7 @@ router = module.exports = express.Router();
 
 // using body parser for req.body
 //router.use(bodyParser.json());
-router.use(bodyParser.text());
+	router.use(bodyParser.text());
 
 // add body path
 router.post('/', function (req, res) {

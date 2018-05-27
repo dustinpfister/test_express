@@ -1,0 +1,26 @@
+<%
+
+   if(!this.layout){
+   
+       this.layout = 'home';
+   
+   }
+
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Request Objects</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+
+        <%= layout %>
+        <%- include _parts/nav %>
+
+        <textarea id="app_out" cols="80" rows="20"></textarea>
+
+        <script src="/js/http.js"></script>
+    </body>
+</html>
