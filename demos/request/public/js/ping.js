@@ -17,7 +17,7 @@ g('app_ping').addEventListener('click', function (e) {
         console.log('good');
         console.log(res.data);
 
-		g('app_out').value += '**********\n'
+        g('app_out').value += '**********\n'
         g('app_out').value += JSON.stringify(res) + '\n\n';
         g('app_out').value += res.data + '\n\n';
 
