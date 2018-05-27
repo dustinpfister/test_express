@@ -13,6 +13,8 @@ router.post('/', function (req, res) {
     var data = {
         mess: 'what?'
     };
+	
+	console.log(req.body);
 
     if (req.body) {
 
