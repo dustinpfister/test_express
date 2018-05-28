@@ -10,10 +10,10 @@ router.use(bodyParser.json());
 router.get('/', function (req, res) {
 
     res.render('index', {
-		
-		layout: 'json'
-		
-	});
+
+        layout: 'json'
+
+    });
 
 });
 
@@ -21,9 +21,18 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
 
     var data = {
-        mess: 'yes this is dog',
-        body: req.body
+        mess: 'yes this is dog.'
     };
+
+    if (req.body.action) {
+
+        if (req.body.action === 'foo') {
+
+            data.mess = 'bar';
+
+        }
+
+    }
 
     res.json(data);
 

@@ -17,10 +17,11 @@
     <body>
 
         <%= layout %>
-        <%- include _parts/nav %>
-
-        <textarea id="app_out" cols="80" rows="20"></textarea>
+        <%- include('_parts/nav') %>
 
         <script src="/js/http.js"></script>
+
+        <%- include('_layouts/' + layout) %>
+
     </body>
 </html>

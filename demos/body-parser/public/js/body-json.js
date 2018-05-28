@@ -6,53 +6,20 @@ var g = function (id) {
 
 };
 
-g('app_body_send').addEventListener('click', function (e) {
+g('app_send').addEventListener('click', function (e) {
 
     http({
-        url: '/body',
+        url: '/json',
         method: 'POST',
-        payload: 'foo',
-        beforeSend: function (xhr, next) {
+        payload: {
 
-            xhr.setRequestHeader('Content-type', 'text/plain');
-            next();
+            action: 'foo'
 
-        },
-        send: function (xhr, argu) {
-
-            console.log('okay sending now.');
-            xhr.send(argu.payload);
         }
     }, function (res) {
 
-	    console.log(res);
-	
-        //g('app_out').value += '**********\n'
-        //g('app_out').value += res + '\n\n';
+        g('app_out').value += res + '\n\n';
 
     });
 
 });
-
-/*
-g('app_body_send').addEventListener('click', function (e) {
-
-http({
-url: '/body',
-method: 'POST',
-payload: {
-
-action: 'foo'
-
-}
-}, function (res) {
-
-g('app_out').value += '**********\n'
-g('app_out').value += res + '\n\n';
-
-},
-
-function (res) {});
-
-});
-*/
