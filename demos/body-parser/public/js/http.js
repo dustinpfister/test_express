@@ -1,3 +1,4 @@
+// my http method
 var http = function (argu, done, fail) {
 
     var xhr = new XMLHttpRequest();
