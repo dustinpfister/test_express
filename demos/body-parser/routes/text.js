@@ -5,13 +5,13 @@ bodyParser = require('body-parser'),
 router = module.exports = express.Router();
 
 // using body parser for req.body
-router.use(bodyParser.json());
+router.use(bodyParser.text());
 
 router.get('/', function (req, res) {
 
     res.render('index', {
 
-        layout: 'json'
+        layout: 'text'
 
     });
 
@@ -25,16 +25,6 @@ router.post('/', function (req, res) {
         body: req.body
     };
 
-    if (req.body.action) {
-
-        if (req.body.action === 'foo') {
-
-            data.mess = 'bar';
-
-        }
-
-    }
-
-    res.json(data);
+    res.send('The parsed body is: '+req.body);
 
 });

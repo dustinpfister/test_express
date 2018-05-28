@@ -12,6 +12,7 @@ app.set('view engine', 'ejs');
 // using what is in the routes folder
 app.use('/', require('./routes/static'));
 app.use('/json', require('./routes/json'));
+app.use('/text', require('./routes/text'));
 
 app.get('/', function (req, res) {
 
