@@ -25,10 +25,10 @@ g('app_body_send').addEventListener('click', function (e) {
         }
     }, function (res) {
 
-	    console.log(res);
+	    //console.log(res);
 	
-        //g('app_out').value += '**********\n'
-        //g('app_out').value += res + '\n\n';
+        g('app_out').value += '**********\n'
+        g('app_out').value += res + '\n\n';
 
     });
 
