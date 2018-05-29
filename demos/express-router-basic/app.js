@@ -1,5 +1,4 @@
 let express = require('express'),
-path = require('path'),
 app = express(),
 
 // getting port this way
