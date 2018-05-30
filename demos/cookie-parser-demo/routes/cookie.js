@@ -6,18 +6,20 @@ router.use(require('cookie-parser')());
 
 router.use(function (req, res, next) {
 
-    let bc = req.cookies._bc;
+    // let my cookie be (or not be) here
+    let mc = req.cookies._mc;
 
-    if (!bc) {
+    // if not make it
+    if (!mc) {
 
-        let id = new Date().getTime();
-
-        res.cookie('_bc', id);
+        // crude id gen for now
+        let id = new Date().getTime().toString();
+        res.cookie('_mc', id);
+        req.cookies._mc = id;
 
     }
 
-    console.log(req.cookies);
-
+    // always continue
     next();
 
 });

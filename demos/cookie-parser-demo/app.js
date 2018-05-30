@@ -6,7 +6,15 @@ app.use(require('./routes/cookie'));
 
 app.get('/', function (req, res) {
 
-    res.send(JSON.stringify(req.cookies));
+    if (req.cookies._mc) {
+
+        res.send(JSON.stringify(req.cookies));
+
+    } else {
+
+        res.send('cookie not set!');
+
+    }
 
 });
 
