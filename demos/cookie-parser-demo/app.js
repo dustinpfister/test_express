@@ -2,11 +2,13 @@ let express = require('express'),
 app = express(),
 port = process.env.PORT || process.argv[2] || 8080;
 
-app.use(require('cookie-parser')());
+app.use(require('./routes/cookie'));
 
 app.get('/', function (req, res) {
-    res.send('Cookies: ' + JSON.stringify(req.cookies));
-})
+
+    res.send(JSON.stringify(req.cookies));
+
+});
 
 app.listen(port, function () {
 
