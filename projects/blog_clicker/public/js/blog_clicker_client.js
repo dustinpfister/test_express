@@ -12,6 +12,20 @@ var model = {
 
 };
 
+var login = function(){
+	
+	$.ajax({
+		method: 'POST',
+		url:'/login'
+		
+	}).done(function(res){
+		
+		console.log(res);
+		
+	});
+	
+};
+
 // render method
 var render = function () {
 
@@ -21,6 +35,7 @@ var render = function () {
 
 };
 
+login();
 render();
 
 // buttons
