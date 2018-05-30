@@ -12,18 +12,18 @@ var model = {
 
 };
 
-var login = function(){
-	
-	$.ajax({
-		method: 'POST',
-		url:'/login'
-		
-	}).done(function(res){
-		
-		console.log(res);
-		
-	});
-	
+var login = function () {
+
+    $.ajax({
+        method: 'POST',
+        url: '/login'
+
+    }).done(function (res) {
+
+        console.log(res);
+
+    });
+
 };
 
 // render method
