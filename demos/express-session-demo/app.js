@@ -2,6 +2,7 @@ let express = require('express'),
 session = require('express-session'),
 FileStore = require('session-file-store')(session),
 
+secret = 'notThatSecretSecret',
 port = process.env.PORT || process.argv[2] || 8080,
 app = express();
 
@@ -13,7 +14,7 @@ app.use(session({
 
         }),
         name: 'foosite', // cookie will show up as foo site
-        secret: 'notThatSecretSecret',
+        secret: secret,
         resave: false,
         saveUninitialized: false,
         cookie: {
@@ -23,7 +24,7 @@ app.use(session({
     }));
 
 // parse cookies, and populate req.cookies
-app.use(require('cookie-parser')());
+app.use(require('cookie-parser')(secret));
 
 app.get('/', function (req, res) {
 
