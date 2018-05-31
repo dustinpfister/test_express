@@ -22,6 +22,9 @@ app.use(session({
 
     }));
 
+// parse cookies, and populate req.cookies
+app.use(require('cookie-parser')());
+
 app.get('/', function (req, res) {
 
     // if count add to it
@@ -37,7 +40,10 @@ app.get('/', function (req, res) {
     }
 
     // send info as json
-    res.json(req.session);
+    res.json({
+        cookies: req.cookies,
+        session: req.session
+    });
 
 });
 
