@@ -9,13 +9,14 @@ posts = low(new FileSync('db/posts.json'));
 // defaults to empty array
 // posts should be added in manually
 // @ /db/posts.js
-posts.defaults({ posts: [
-/*
-    {
+posts.defaults({
+    posts: [
+        /*{
         text: 'There should be a database of demo posts at /db/posts.json'
-    }
-*/
-]});
+        }
+         */
+    ]
+});
 
 router = module.exports = express.Router();
 
@@ -29,14 +30,14 @@ router.post('/', function (req, res) {
 
 });
 
+// get hard coded demo posts in the database at /db/posts.json
 router.post('/get-demos', function (req, res) {
 
-    console.log(posts.get('posts').find({id:'0'}).value());
+    // just a single post for now that is always post #0
+    let post = posts.get('posts').find({
+            id: '0'
+        }).value();
 
-    res.json({
-
-        mess: 'this is all I have'
-
-    });
+    res.json(post);
 
 });

@@ -1,19 +1,24 @@
 
 var write = {
 
-    wp: 0, // write points
+    wp: 0, // word points
     money: 0,
     post_demos: [],
 
     // what to do when the write button is clicked
     write: function () {
 
+        // word points
         this.wp += 1;
 
     },
 
     // fetch post demos
     getPostDemos: function () {
+
+        var self = this;
+
+        self.post_demos = [];
 
         $.ajax({
             method: 'POST',
@@ -24,7 +29,11 @@ var write = {
 
         }).done(function (res) {
 
-            console.log(res);
+            // pushing what should for now
+            // be a single post object
+            self.post_demos.push(res);
+
+            console.log(self);
 
         });
 
