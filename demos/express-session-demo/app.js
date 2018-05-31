@@ -6,18 +6,32 @@ app = express();
 
 app.use(session({
 
-        secret: 'foobar',
+        name: 'foosite',
+        secret: 'notThatSecretSecret',
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 10000
+        }
 
     }));
 app.use(require('cookie-parser')());
 
-app.get('*', function (req, res) {
+app.get('/', function (req, res) {
+
+    if (req.session.count) {
+
+        req.session.count += 1;
+
+    } else {
+
+        req.session.count = 1;
+
+    }
 
     res.json({
 
-	    cookies: req.cookies,
+        cookies: req.cookies,
         session: req.session
 
     });
