@@ -1,40 +1,43 @@
 let express = require('express'),
 session = require('express-session'),
+FileStore = require('session-file-store')(session),
 
 port = process.env.PORT || process.argv[2] || 8080,
 app = express();
 
 app.use(session({
 
-        name: 'foosite',
+        store: new FileStore({
+
+            path: './session-store'
+
+        }),
+        name: 'foosite', // cookie will show up as foo site
         secret: 'notThatSecretSecret',
         resave: false,
         saveUninitialized: false,
         cookie: {
-            maxAge: 10000
+            maxAge: 30000, // making sessions last 30 secs
         }
 
     }));
-app.use(require('cookie-parser')());
 
 app.get('/', function (req, res) {
 
+    // if count add to it
     if (req.session.count) {
 
         req.session.count += 1;
 
     } else {
 
+        // else set it to 1
         req.session.count = 1;
 
     }
 
-    res.json({
-
-        cookies: req.cookies,
-        session: req.session
-
-    });
+    // send info as json
+    res.json(req.session);
 
 });
 
