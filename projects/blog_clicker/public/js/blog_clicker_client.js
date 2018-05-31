@@ -1,15 +1,30 @@
 
 var write = {
 
-    wp: 0, // word points
+    wp: 0, // word points for current post
     money: 0,
+    text: '', // the current text
     post_demos: [],
 
     // what to do when the write button is clicked
     write: function () {
 
-        // word points
-        this.wp += 1;
+        // post_demos index
+        let i = 0,
+
+        // the full current demo text
+        demoText = this.post_demos[i].text.split(' ');
+
+        if (this.wp < demoText.length) {
+
+            // add word point
+            this.wp += 1;
+
+            this.text = demoText.slice(0, this.wp).join(' ');
+
+        }
+
+        this.render();
 
     },
 
@@ -36,6 +51,17 @@ var write = {
             console.log(self);
 
         });
+
+    },
+
+    // render
+    render: function () {
+
+        // set word point count
+        $('.wp').text(this.wp);
+        $('.money').text(this.money);
+
+        $('.text_write').text(this.text);
 
     }
 
@@ -73,6 +99,6 @@ render();
 $('#button_write').on('click', function (e) {
 
     write.write();
-    render();
+    //render();
 
 });
