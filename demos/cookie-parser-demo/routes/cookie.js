@@ -19,7 +19,6 @@ router.use(function (req, res, next) {
 
     }
 
-    // always continue
     next();
 
 });

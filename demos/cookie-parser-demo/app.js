@@ -2,19 +2,12 @@ let express = require('express'),
 app = express(),
 port = process.env.PORT || process.argv[2] || 8080;
 
+// check for cookies
 app.use(require('./routes/cookie'));
 
 app.get('/', function (req, res) {
 
-    if (req.cookies._mc) {
-
-        res.send(JSON.stringify(req.cookies));
-
-    } else {
-
-        res.send('cookie not set!');
-
-    }
+    res.send(JSON.stringify(req.cookies));
 
 });
 
