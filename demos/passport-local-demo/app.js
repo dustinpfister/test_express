@@ -26,7 +26,7 @@ passport.use(new Strategy(function (username, password, cb) {
 
         console.log('okay that is a start');
 
-        if (password.toString().toLowerCase() === user.password) {
+        if (username === user.username && password.toString() === user.password) {
             return cb(null, user);
 
         }
