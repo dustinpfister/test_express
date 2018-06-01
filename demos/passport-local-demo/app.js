@@ -2,6 +2,9 @@ let express = require('express'),
 passport = require('passport'),
 Strategy = require('passport-local').Strategy,
 
+// my not so secret secret
+secret = 'eeeek',
+
 user = {
     username: 'foo',
     id: 0,
@@ -16,15 +19,14 @@ app.set('view engine', 'ejs');
 app.use(require('body-parser').urlencoded({
         extended: true
     }));
+
 app.use(require('express-session')({
-        secret: 'keyboard cat',
+        secret: secret,
         resave: false,
         saveUninitialized: false
     }));
 
 passport.use(new Strategy(function (username, password, cb) {
-
-        console.log('okay that is a start');
 
         if (username === user.username && password.toString() === user.password) {
             return cb(null, user);
