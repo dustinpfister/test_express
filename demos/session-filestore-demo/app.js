@@ -16,7 +16,7 @@ app.use(session({
             path: './session-store'
 
         }),
-        name: '_fs-demo', // cookie will show up as foo site
+        name: '_fs_demo', // cookie will show up as foo site
         secret: secret,
         resave: false,
         saveUninitialized: false,
