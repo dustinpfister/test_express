@@ -3,7 +3,7 @@ app = express(),
 port = process.env.PORT || process.argv[2] || 8080;
 
 // check for cookies
-app.use(require('./routes/cookie'));
+app.use(require('cookie-parser')());
 
 app.get('/', function (req, res) {
 
