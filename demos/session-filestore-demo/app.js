@@ -16,40 +16,37 @@ app.use(session({
             path: './session-store'
 
         }),
-        name: 'foosite', // cookie will show up as foo site
+        name: '_fs-demo', // cookie will show up as foo site
         secret: secret,
         resave: false,
         saveUninitialized: false,
+        cookie: {
+
+            // five year cookie
+            maxAge: 1000 * 60 * 60 * 24 * 365 * 5
+
+        }
 
     }));
 
-// parse cookies, and populate req.cookies
-app.use(require('cookie-parser')(secret));
+app.use(require('cookie-parser')());
 
 app.get('/', function (req, res) {
 
-    // if count add to it
-    if (req.session.count) {
-
-        req.session.count += 1;
-
-    } else {
-
-        // else set it to 1
-        req.session.count = 1;
-
+    // simple count for the session
+    if (!req.session.count) {
+        req.session.count = 0;
     }
+    req.session.count += 1;
+    //req.session.cookie = req.cookies['_fs-demo'];
 
     // send info as json
-    res.json({
-        cookies: req.cookies,
-        session: req.session
-    });
+    res.json(req.session);
 
 });
 
 app.listen(port, function () {
 
-    console.log('express-session demo is up on port: ' + port);
+    console.log('session-filestore demo is up on port: ' + port);
 
 });
