@@ -10,8 +10,8 @@ app.set('view engine', 'ejs');
 // session cookies
 app.use(require('./lib/session'));
 
-// a login path
-app.use('/login', require('./routes/login'));
+// attach /login, and /logout
+app.use('/', require('./routes/login'));
 app.use('/posts', require('./routes/posts'));
 
 // static path for /js, /css, and /fonts
