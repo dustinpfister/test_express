@@ -1,13 +1,5 @@
 <h1>Passport local demo</h1>
 
-<% if (!user) { %>
-    <p>Welcome! Please <a href="/login">log in</a>.</p>
-<% } else { %>
-    <p>Hello, <%= user.username %> <a href="/logout">logout</a></p>
-<% } %>
-
-<br>
-
 <div>
     <%- include('./layouts/' + layout) %>
 </div>
