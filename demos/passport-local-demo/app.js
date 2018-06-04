@@ -28,23 +28,31 @@ app.set('view engine', 'ejs');
 
 // using body parser to parse the body of incoming post requests
 app.use(require('body-parser').urlencoded({
-        extended: true // must give a value for extended
-    }));
+    extended: true // must give a value for extended
+}));
 
 // using express-session for session cookies
-app.use(require('express-session')({
-        name: 'site_cookie',
-        secret: secret,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
+app.use(
 
-            // make session cookies only last 15 seconds
-            // for the sake of this demo
-            maxAge: 15000
+    require('express-session')(
 
+        {
+            name: 'site_cookie',
+            secret: secret,
+            resave: false,
+            saveUninitialized: false,
+            cookie: {
+
+                // make session cookies only last 15 seconds
+                // for the sake of this demo
+                maxAge: 15000
+
+            }
         }
-    }));
+
+    )
+
+);
 
 // using the local strategy with passport
 passport.use(
@@ -53,25 +61,31 @@ passport.use(
     new Strategy(
 
         // options for passport local
-    {
+        {
 
-        usernameFeild: 'username',
-        passwordFeild: 'password'
+            // using custom field names
+            usernameField: 'user',
+            passwordField: 'pass'
 
-    },
+        },
 
         // login method
         function (username, password, cb) {
 
-        if (username === user.username && password.toString() === user.password) {
-            return cb(null, user);
+            if (username === user.username && password.toString() === user.password) {
+
+                return cb(null, user);
+
+            }
+
+            // null and false for all other cases
+            return cb(null, false);
 
         }
 
-        // null and false for all other cases
-        return cb(null, false);
+    )
 
-    }));
+);
 
 passport.serializeUser(function (user, cb) {
     cb(null, user.id);
@@ -96,6 +110,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/login',
+
     function (req, res) {
     res.render('index', {
         layout: 'login',
@@ -105,11 +120,16 @@ app.get('/login',
 
 app.post('/login',
     passport.authenticate('local', {
+        // redirect back to /login
+        // if login fails
         failureRedirect: '/login'
     }),
+ 
+    // end up at / if login works
     function (req, res) {
-    res.redirect('/');
-});
+        res.redirect('/');
+    }
+);
 
 app.get('/logout',
     function (req, res) {
