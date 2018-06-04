@@ -7,6 +7,9 @@ port = process.env.PORT || process.argv[2] || 8080;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// session cookies
+app.use(require('./lib/session'));
+
 // a login path
 app.use('/login', require('./routes/login'));
 app.use('/posts', require('./routes/posts'));
@@ -15,6 +18,8 @@ app.use('/posts', require('./routes/posts'));
 app.use('/', require('./routes/static'));
 
 app.get('/', function (req, res) {
+
+    console.log(req.session);
 
     res.render('index', {
         layout: 'word'
