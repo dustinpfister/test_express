@@ -17,12 +17,29 @@ app.use('/posts', require('./routes/posts'));
 // static path for /js, /css, and /fonts
 app.use('/', require('./routes/static'));
 
-app.get('/', function (req, res) {
+app.get('/',
 
-    console.log(req.session);
+    function (req, res, next) {
+
+    // redirect to login if no user
+    if (!req.user) {
+
+        res.redirect('/login');
+
+    } else {
+
+        next();
+
+    }
+
+},
+
+    function (req, res) {
 
     res.render('index', {
-        layout: 'word'
+        layout: 'word',
+        session: req.session || {},
+        user: req.user || {}
     });
 
 });
