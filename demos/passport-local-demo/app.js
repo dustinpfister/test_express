@@ -36,7 +36,14 @@ app.use(require('express-session')({
         name: 'site_cookie',
         secret: secret,
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: {
+
+            // make session cookies only last 15 seconds
+            // for the sake of this demo
+            maxAge: 15000
+
+        }
     }));
 
 // using the local strategy with passport
@@ -46,29 +53,25 @@ passport.use(
     new Strategy(
 
         // options for passport local
-        {
+    {
 
-            usernameFeild: 'username',
-            passwordFeild: 'password'
+        usernameFeild: 'username',
+        passwordFeild: 'password'
 
-        },
+    },
 
         // login method
         function (username, password, cb) {
 
-            if (username === user.username && password.toString() === user.password) {
-                return cb(null, user);
-
-            }
-
-            // null and false for all other cases
-            return cb(null, false);
+        if (username === user.username && password.toString() === user.password) {
+            return cb(null, user);
 
         }
 
-    )
+        // null and false for all other cases
+        return cb(null, false);
 
-);
+    }));
 
 passport.serializeUser(function (user, cb) {
     cb(null, user.id);
