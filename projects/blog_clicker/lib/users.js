@@ -11,7 +11,7 @@ users.defaults({
     users: [{
             id: 0,
             username: 'stin',
-            password: '321'
+            password: '123'
         }
     ]
 }).write();
