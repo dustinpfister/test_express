@@ -47,8 +47,9 @@ api.getUserCount = function () {
 api.addUser = function (userObj) {
 
     userObj.id = this.getUserCount();
-	
-	console.log(userObj);
 
-    return '';
+    // add, and write user
+    this.users.get('users').push(userObj).write();
+
+    return userObj;
 };
