@@ -6,7 +6,10 @@ app = express();
 
 app.all('*', function (req, res, next) {
 
-    console.log(req.method);
+    console.log('*** A request ***');
+    console.log('method: ' + req.method);
+    console.log('url: ' + req.url);
+    console.log('*****************');
 
     next();
 
@@ -15,6 +18,10 @@ app.all('*', function (req, res, next) {
 app.use('/', express.static('public'));
 
 app.all('*', function (req, res) {
+
+    console.log('*** 404 ***');
+    console.log('404 for url: ' + req.url);
+    console.log('***********');
 
     res.send('404');
 
