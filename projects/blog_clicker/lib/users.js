@@ -22,7 +22,15 @@ api.users = users;
 api.findUserByName = function (username) {
 
     return this.users.get('users').find({
-            username: username
-        });
+        username: username
+    });
+
+};
+
+api.findUserById = function (id) {
+
+    return this.users.get('users').find({
+        id: id
+    });
 
 };

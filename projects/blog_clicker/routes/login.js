@@ -9,13 +9,15 @@ users = require('../lib/users'),
 secret = 'eeeek',
 
 // temp hard coded user
+/*
 user = {
 
-    username: 'stin',
-    password: '123',
-    id: 0
+username: 'stin',
+password: '123',
+id: 0
 
 },
+ */
 
 // login router
 router = module.exports = express.Router();
@@ -43,6 +45,14 @@ passport.use(
         // login method
         function (username, password, cb) {
 
+        let user = users.findUserByName(username).value();
+
+        if (!user) {
+
+            return cb(null, false);
+
+        }
+
         if (username === user.username && password.toString() === user.password) {
 
             return cb(null, user);
@@ -58,6 +68,9 @@ passport.serializeUser(function (user, cb) {
     cb(null, user.id);
 });
 passport.deserializeUser(function (id, cb) {
+
+    let user = users.findUserById(id).value();
+
     cb(null, user);
 });
 
