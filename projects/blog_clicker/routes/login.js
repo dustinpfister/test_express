@@ -46,6 +46,8 @@ passport.use(
         function (username, password, cb) {
 
         let user = users.findUserByName(username).value();
+		
+		console.log(user)
 
         if (!user) {
 
