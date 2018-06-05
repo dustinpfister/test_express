@@ -10,7 +10,7 @@ router.get('/signup', function (req, res) {
 
     res.render('index', {
         layout: 'signup',
-		user: false
+        user: false
     });
 });
 

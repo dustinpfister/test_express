@@ -3,6 +3,9 @@ let express = require('express'),
 passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy,
 
+// using /lib/users.js to work with /db/users.json
+users = require('../lib/users'),
+
 secret = 'eeeek',
 
 // temp hard coded user
