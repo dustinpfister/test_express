@@ -5,6 +5,7 @@ router = module.exports = express.Router();
 // check for user
 router.use(function (req, res, next) {
 
+
     if (req.method === 'GET') {
 
         if (!req.user) {
@@ -31,5 +32,6 @@ router.use(function (req, res, next) {
         next();
 
     }
+
 
 });

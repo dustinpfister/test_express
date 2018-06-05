@@ -7,13 +7,15 @@ port = process.env.PORT || process.argv[2] || 8080;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// lib
+// session
 app.use(require('./lib/session')); // session cookies
+
+// login
+app.use('/', require('./routes/login')); // attach /login, and /logout
 app.use(require('./lib/check-for-user')); // check for user login
 
 // routes
 app.use('/', require('./routes/static')); // static path for /js, /css, and /fonts
-app.use('/', require('./routes/login')); // attach /login, and /logout
 app.use('/', require('./routes/signup')); // attach /signup
 app.use('/', require('./routes/word')); // attach /word
 app.use('/', require('./routes/demos')); // attach /demos, and /demos/get-demos
