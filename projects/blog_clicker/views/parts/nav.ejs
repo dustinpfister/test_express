@@ -4,7 +4,12 @@
 <p>Hello <%= user.username %> (<a href="/logout">logout</a>)</p>
 <div class="row">
     <div class="col-md-6"><a href="/">home</a></div>
+    <div class="col-md-6"></div>
 </div>
 <% }else{ %>
-    <p>please login</p>
+<p>Hello, sign in, or sign up.</p>
+<div class="row">
+    <div class="col-md-6"><a href="/login">login</a></div>
+    <div class="col-md-6"><a href="/signup">signup</a></div>
+</div>
 <% } %>
