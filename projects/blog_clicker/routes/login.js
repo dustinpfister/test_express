@@ -75,6 +75,25 @@ router.get('/login', function (req, res) {
 
 router.post('/login',
 
+    // just a simple find user method that logs to the console
+    function (req, res, next) {
+
+    let user = users.findUserByName(req.body.user).value();
+
+    if (user) {
+
+        console.log(user);
+
+    } else {
+
+        console.log('user: ' + req.body.user + ' not found.');
+
+    }
+
+    next();
+
+},
+
     passport.authenticate('local', {
         // redirect back to /login
         // if login fails

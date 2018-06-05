@@ -19,7 +19,7 @@ api.users = users;
 
 api.findUserByName = function (username) {
 
-    return users.find({
+    return users.get('users').find({
             username: username
         });
 
