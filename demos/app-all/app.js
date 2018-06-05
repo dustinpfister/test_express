@@ -4,6 +4,7 @@ port = process.env.PORT || process.argv[2] || 8080,
 
 app = express();
 
+// log info about ALL requests to ALL paths
 app.all('*', function (req, res, next) {
 
     console.log('*** A request ***');
@@ -15,8 +16,11 @@ app.all('*', function (req, res, next) {
 
 });
 
+// host some static assets in a public folder
 app.use('/', express.static('public'));
 
+// What to do for ALL requests for ALL Paths 
+// that are not handled above
 app.all('*', function (req, res) {
 
     console.log('*** 404 ***');
