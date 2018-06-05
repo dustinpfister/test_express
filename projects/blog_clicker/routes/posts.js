@@ -20,7 +20,7 @@ posts.defaults({
 
 router = module.exports = express.Router();
 
-router.post('/posts', function (req, res) {
+router.post('/demos', function (req, res) {
 
     res.json({
 
@@ -31,7 +31,7 @@ router.post('/posts', function (req, res) {
 });
 
 // get hard coded demo posts in the database at /db/posts.json
-router.post('/posts/get-demos', function (req, res) {
+router.post('/demos/get-demos', function (req, res) {
 
     // just a single post for now that is always post #0
     let post = posts.get('posts').find({

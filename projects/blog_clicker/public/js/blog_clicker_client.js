@@ -40,7 +40,7 @@ var write = {
             data: {
                 foo: 'bar'
             },
-            url: '/posts/get-demos'
+            url: '/demos/get-demos'
 
         }).done(function (res) {
 
