@@ -22,17 +22,9 @@ api.users = users;
 // find a user by username
 api.findUserByName = function (username) {
 
-    console.log('this is the findUserByName method');
-	console.log(username);
-
-	let user = this.users.get('users').find({
+    return this.users.get('users').find({
         username: username
     });
-	
-	console.log(user.value());
-	console.log('**********');
-	
-    return user;
 
 };
 
