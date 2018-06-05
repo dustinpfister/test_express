@@ -14,6 +14,12 @@ app.all('*', function (req, res, next) {
 
 app.use('/', express.static('public'));
 
+app.all('*', function (req, res) {
+
+    res.send('404');
+
+});
+
 app.listen(port, function () {
 
     console.log('app.all demo is up on port: ' + port);
