@@ -11,7 +11,8 @@ router.use(require('express-session')({
         saveUninitialized: false, // Save a session that is new, but has not been modified
         cookie: {
 
-            maxAge: 1000 * 60
+            // five hour long sessions for now
+            maxAge: 1000 * 60 * 60 * 5
 
         }
 
