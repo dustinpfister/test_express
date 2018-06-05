@@ -20,3 +20,12 @@ posts.defaults({
 
 // make users db part of the api
 api.posts = posts;
+
+// get the posts that are owned by the given user id
+api.getOwnedPosts = function (id) {
+
+    return this.posts.get('posts').find({
+        owner: id
+    });
+
+};
