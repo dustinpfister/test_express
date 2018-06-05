@@ -7,7 +7,9 @@ router = module.exports = express.Router();
 users = require('../lib/users'),
 
 // body parser
-router.use(require('body-parser').json());
+router.use(require('body-parser').urlencoded({
+        extended: true // must give a value for extended
+    }));
 
 router.get('/signup', function (req, res) {
 
@@ -39,6 +41,8 @@ router.post('/signup',
     // make account
     function (req,res) {
 
+	console.log(req.body);
+	
     users.addUser(req.body);
 
     res.redirect('/login');
