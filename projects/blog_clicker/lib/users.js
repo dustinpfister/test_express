@@ -19,6 +19,7 @@ users.defaults({
 // make users db part of the api
 api.users = users;
 
+// find a user by username
 api.findUserByName = function (username) {
 
     return this.users.get('users').find({
@@ -27,6 +28,7 @@ api.findUserByName = function (username) {
 
 };
 
+// find a user by user id
 api.findUserById = function (id) {
 
     return this.users.get('users').find({
@@ -34,3 +36,10 @@ api.findUserById = function (id) {
     });
 
 };
+
+api.addUser = function(userObj){
+	
+	
+	
+	return '';
+}

@@ -19,7 +19,7 @@ router.get('/signup', function (req, res) {
 
 router.post('/signup',
 
-    // check username
+    // check for username
     function (req, res) {
 
     let user = users.findUserByName(req.body.user).value();
@@ -30,8 +30,17 @@ router.post('/signup',
 
     } else {
 
-        res.send('okay you can have that.');
+        next();
 
     }
+
+},
+
+    // make account
+    function () {
+
+    users.addUser(req.body);
+
+    res.redirect('/login');
 
 });
