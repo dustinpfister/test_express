@@ -6,6 +6,7 @@ api = module.exports = {},
 // users
 users = low(new FileSync('db/users.json'));
 
+// default for database is a single user named 'stin'
 users.defaults({
     users: [{
             id: 0,
@@ -15,11 +16,12 @@ users.defaults({
     ]
 }).write();
 
+// make users db part of the api
 api.users = users;
 
 api.findUserByName = function (username) {
 
-    return users.get('users').find({
+    return this.users.get('users').find({
             username: username
         });
 
