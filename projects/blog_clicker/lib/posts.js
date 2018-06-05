@@ -8,8 +8,10 @@ posts = low(new FileSync('db/posts.json'));
 
 // default for database is a single user named 'stin'
 posts.defaults({
-    users: [{
+    posts: [{
             owner: 0,
+            published: new Date(),
+            updated: new Date(),
             text: 'This is blog clicker the greatest game ever!',
             likes: 0
         }
@@ -18,5 +20,3 @@ posts.defaults({
 
 // make users db part of the api
 api.posts = posts;
-
-

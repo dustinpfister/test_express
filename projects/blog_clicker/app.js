@@ -10,18 +10,17 @@ app.set('view engine', 'ejs');
 // session
 app.use(require('./lib/session')); // session cookies
 
-// login
+// public routes
+app.use('/', require('./routes/static')); // static path for /js, /css, and /fonts
+app.use('/', require('./routes/signup')); // attach /signup
+app.use('/', require('./routes/demos')); // attach /demos, and /demos/get-demos
 app.use('/', require('./routes/login')); // attach /login, and /logout
 app.use(require('./lib/check-for-user')); // check for user login
 
-// routes
-app.use('/', require('./routes/static')); // static path for /js, /css, and /fonts
-app.use('/', require('./routes/signup')); // attach /signup
+// login routes
 app.use('/', require('./routes/word')); // attach /word
-app.use('/', require('./routes/demos')); // attach /demos, and /demos/get-demos
-
-// attach /
-app.use('/', require('./routes/home'));
+app.use('/', require('./routes/posts')); // attach /posts
+app.use('/', require('./routes/home')); // home
 /*
 app.get('/',
 
