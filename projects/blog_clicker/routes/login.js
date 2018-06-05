@@ -66,7 +66,7 @@ router.get('/login', function (req, res) {
     // render index with login layout
     res.render('index', {
         layout: 'login',
-        user: req.user
+        user: false
     });
 });
 
