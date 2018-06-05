@@ -15,6 +15,7 @@ app.use('/', require('./routes/login'));
 app.use('/', require('./routes/signup'));
 
 // posts path for blog post demos
+app.use('/', require('./routes/word'));
 app.use('/posts', require('./routes/posts'));
 
 // static path for /js, /css, and /fonts
@@ -40,7 +41,7 @@ app.get('/',
     function (req, res) {
 
     res.render('index', {
-        layout: 'word',
+        layout: 'home',
         session: req.session || {},
         user: req.user || {}
     });
