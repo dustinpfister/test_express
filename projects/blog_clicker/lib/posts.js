@@ -24,7 +24,7 @@ api.posts = posts;
 // get the posts that are owned by the given user id
 api.getOwnedPosts = function (id) {
 
-    return this.posts.get('posts').find({
+    return this.posts.get('posts').filter({
         owner: id
     });
 

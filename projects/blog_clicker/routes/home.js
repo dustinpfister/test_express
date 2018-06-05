@@ -15,7 +15,8 @@ router.get('/', function (req, res) {
     res.render('index', {
         layout: 'home',
         session: req.session || {},
-        user: req.user || {}
+        user: req.user || {},
+        posts: userPosts || []
     });
 
 });
