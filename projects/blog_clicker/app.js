@@ -14,9 +14,9 @@ app.use(require('./lib/session'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/signup'));
 
-// posts path for blog post demos
+// attach /word, /posts, and /get-demos
 app.use('/', require('./routes/word'));
-app.use('/posts', require('./routes/posts'));
+app.use('/', require('./routes/posts'));
 
 // static path for /js, /css, and /fonts
 app.use('/', require('./routes/static'));
