@@ -4,7 +4,7 @@ FileSync = require('lowdb/adapters/FileSync'),
 //adapter = new FileSync('db/posts.json'),
 
 // post demos
-posts = low(new FileSync('db/posts.json'));
+posts = low(new FileSync('db/demo-posts.json'));
 
 // defaults to empty array
 // posts should be added in manually
