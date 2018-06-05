@@ -14,9 +14,9 @@ app.use(require('./lib/session'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/signup'));
 
-// attach /word, /posts, and /get-demos
+// attach /word, /demos, and /demos/get-demos
 app.use('/', require('./routes/word'));
-app.use('/', require('./routes/posts'));
+app.use('/', require('./routes/demos'));
 
 // static path for /js, /css, and /fonts
 app.use('/', require('./routes/static'));
