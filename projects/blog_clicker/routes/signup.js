@@ -20,7 +20,7 @@ router.get('/signup', function (req, res) {
 router.post('/signup',
 
     // check for username
-    function (req, res) {
+    function (req, res,next) {
 
     let user = users.findUserByName(req.body.user).value();
 
@@ -37,7 +37,7 @@ router.post('/signup',
 },
 
     // make account
-    function () {
+    function (req,res) {
 
     users.addUser(req.body);
 

@@ -37,9 +37,18 @@ api.findUserById = function (id) {
 
 };
 
-api.addUser = function(userObj){
+// get user count
+api.getUserCount = function () {
+
+    return this.users.get('users').value().length;
+
+};
+
+api.addUser = function (userObj) {
+
+    userObj.id = this.getUserCount();
 	
-	
-	
-	return '';
-}
+	console.log(userObj);
+
+    return '';
+};
