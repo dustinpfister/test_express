@@ -10,6 +10,9 @@ app.set('view engine', 'ejs');
 // session cookies
 app.use(require('./lib/session'));
 
+// static path for /js, /css, and /fonts
+app.use('/', require('./routes/static'));
+
 // attach /login, and /logout, and signup
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/signup'));
@@ -18,9 +21,9 @@ app.use('/', require('./routes/signup'));
 app.use('/', require('./routes/word'));
 app.use('/', require('./routes/demos'));
 
-// static path for /js, /css, and /fonts
-app.use('/', require('./routes/static'));
-
+// attach /
+app.use('/', require('./routes/home'));
+/*
 app.get('/',
 
     function (req, res, next) {
@@ -47,6 +50,7 @@ app.get('/',
     });
 
 });
+*/
 
 app.listen(port, function () {
 
