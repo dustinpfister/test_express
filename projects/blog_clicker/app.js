@@ -7,50 +7,47 @@ port = process.env.PORT || process.argv[2] || 8080;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// session cookies
-app.use(require('./lib/session'));
+// lib
+app.use(require('./lib/session')); // session cookies
+app.use(require('./lib/check-for-user')); // check for user login
 
-// static path for /js, /css, and /fonts
-app.use('/', require('./routes/static'));
-
-// attach /login, and /logout, and signup
-app.use('/', require('./routes/login'));
-app.use('/', require('./routes/signup'));
-
-// attach /word, /demos, and /demos/get-demos
-app.use('/', require('./routes/word'));
-app.use('/', require('./routes/demos'));
+// routes
+app.use('/', require('./routes/static')); // static path for /js, /css, and /fonts
+app.use('/', require('./routes/login')); // attach /login, and /logout
+app.use('/', require('./routes/signup')); // attach /signup
+app.use('/', require('./routes/word')); // attach /word
+app.use('/', require('./routes/demos')); // attach /demos, and /demos/get-demos
 
 // attach /
 app.use('/', require('./routes/home'));
 /*
 app.get('/',
 
-    function (req, res, next) {
+function (req, res, next) {
 
-    // redirect to login if no user
-    if (!req.user) {
+// redirect to login if no user
+if (!req.user) {
 
-        res.redirect('/login');
+res.redirect('/login');
 
-    } else {
+} else {
 
-        next();
+next();
 
-    }
+}
 
 },
 
-    function (req, res) {
+function (req, res) {
 
-    res.render('index', {
-        layout: 'home',
-        session: req.session || {},
-        user: req.user || {}
-    });
+res.render('index', {
+layout: 'home',
+session: req.session || {},
+user: req.user || {}
+});
 
 });
-*/
+ */
 
 app.listen(port, function () {
 
