@@ -84,12 +84,13 @@ router.post('/login',
 
 });
 
-router.post('/logout', function (req, res) {
+router.get('/logout', function (req, res) {
 
-    res.json({
+    if (req.user) {
 
-        mess: 'hello there'
+        req.logout();
 
-    });
+    }
+    res.redirect('/login');
 
 });
