@@ -5,10 +5,22 @@ app = express();
 
 app.use('/', express.static('public'));
 
-app.use(require('body-parser').raw());
-app.post('/', function (req, res) {
+app.use(require('body-parser').raw({
+
+        limit: '1024kb'
+
+    }));
+
+app.post('/post', function (req, res) {
 
     console.log(req.body);
+    console.log(req.rawBody);
+	
+	req.on('data', function(chunk){
+		
+		console.log(chunk.toString());
+		
+	});
 
     res.json({
 
