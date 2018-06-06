@@ -10,7 +10,15 @@ $('#imgSend').on('click', function (e) {
 
     if (files.length > 0) {
 
-        console.log(files[0]);
+        $.ajax({
+            type: 'POST',
+            url: '/',
+            data: files[0],
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            console.log(data);
+        });
 
     } else {
 

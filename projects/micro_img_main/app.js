@@ -8,9 +8,11 @@ app.use('/', express.static('public'));
 app.use(require('body-parser').raw());
 app.post('/', function (req, res) {
 
+    console.log(req.body);
+
     res.json({
 
-        body: req.body
+        mess: 'check cmd'
 
     });
 
