@@ -27,6 +27,10 @@ $('#imgSend').on('click', function (e) {
             type: 'application/json'
         });
 
+    console.log(blob.type);
+
+    var files = $('#imgInp')[0].files;
+
     $.ajax({
         type: 'POST',
         url: '/post',
