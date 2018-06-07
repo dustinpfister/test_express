@@ -14,46 +14,6 @@ app.use(require('body-parser').raw({
 
     }));
 
-// okay so a simple get request works if it is running
-let req = http.request({
-        hostname: 'localhost',
-        port: 8080,
-        path: '/'
-    }, function (res) {
-
-        res.on('data', function (chunk) {
-
-            console.log(chunk.toString());
-
-        });
-
-        res.on('end', function () {
-
-            console.log('looks like we have a response so...');
-
-            app.listen(port, function () {
-
-                console.log('micro_img_main is up on port: ' + port);
-
-            });
-
-        });
-
-    });
-
-req.on('end', function () {
-
-    console.log('data');
-
-});
-
-req.on('error', function (e) {
-
-    console.log('error: ' + e.message);
-
-});
-req.end();
-
 app.post('/post', function (req, res) {
 
     // if we have a body to send to the micro service
@@ -121,3 +81,42 @@ app.post('/post', function (req, res) {
     }
 
 });
+
+// Start the APP if the micro service is running
+let req = http.request({
+        hostname: 'localhost',
+        port: 8080,
+        path: '/'
+    }, function (res) {
+
+        let data = '';
+
+        res.on('data', function (chunk) {
+
+            data += chunk.toString();
+
+        });
+
+        res.on('end', function () {
+
+            console.log('looks like we have a response so...');
+            console.log(data === 'bar');
+
+            app.listen(port, function () {
+
+                console.log('micro_img_main is up on port: ' + port);
+
+            });
+
+        });
+
+    });
+
+req.on('error', function (e) {
+
+    console.log('error: ' + e.message);
+    console.log('This app needs mocro_img_scale running on port: 8080');
+    console.log('The app WILL NOT listen, end of line bye');
+
+});
+req.end();
