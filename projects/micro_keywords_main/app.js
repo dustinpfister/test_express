@@ -8,11 +8,12 @@ app.use('/', express.static('public'));
 
 app.use(require('body-parser').json());
 
-app.post('/post', function (req, res) {
+app.post('/', function (req, res) {
 
     res.json({
 
-        mess: 'yes this is dog'
+        mess: 'yes this is dog',
+        body: req.body
 
     });
 
