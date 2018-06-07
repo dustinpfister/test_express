@@ -10,6 +10,17 @@ app = express();
 // post requests with keyword json data
 app.use(require('body-parser').json());
 
+// about path
+app.get('/about', function (req, res) {
+
+    res.json({
+
+        service_name: 'micro_keywords_logger'
+
+    });
+
+});
+
 // GET requests at /
 app.get('/', function (req, res) {
 

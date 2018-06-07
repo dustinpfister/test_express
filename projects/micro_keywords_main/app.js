@@ -6,73 +6,15 @@ app = express();
 
 app.use('/', express.static('public'));
 
-app.use(require('body-parser').json();
+app.use(require('body-parser').json());
 
 app.post('/post', function (req, res) {
 
-    // if we have a body to send to the micro service
-    if (req.body) {
+    res.json({
 
-        // make the post request
-        let req = http.request({
+        mess: 'yes this is dog'
 
-                hostname: 'localhost',
-                path: '/',
-                port: 8080,
-                method: 'POST'
-
-            }, function (microRes) {
-
-                let data = '';
-
-                microRes.on('data', function (chunk) {
-
-                    // expect json
-                    data += chunk.toString();
-
-                });
-
-                microRes.on('end', function () {
-
-                    res.json({
-
-                        mess: 'looks like we made it',
-                        data: JSON.parse(data),
-                        success: false
-
-                    });
-
-                });
-
-            });
-
-        // if error
-        req.on('error', function (e) {
-
-            res.json({
-
-                mess: 'ERROR: ' + e.message,
-                success: false
-
-            });
-
-        });
-
-        // write payload and end
-        req.write('foo');
-        req.end();
-
-    } else {
-
-        // else we do not have a body to send
-        res.json({
-
-            success: false,
-            mess: 'no body'
-
-        });
-
-    }
+    });
 
 });
 
@@ -80,7 +22,7 @@ app.post('/post', function (req, res) {
 let req = http.request({
         hostname: 'localhost',
         port: 8080,
-        path: '/'
+        path: '/about'
     }, function (res) {
 
         let data = '';
@@ -101,13 +43,13 @@ let req = http.request({
 
                 console.log(data);
 
-                if (data.service_name === 'micro_img_scale') {
+                if (data.service_name === 'micro_keywords_logger') {
 
                     console.log('looks good lets listen on port: ' + port);
 
                     app.listen(port, function () {
 
-                        console.log('micro_img_main is up on port: ' + port);
+                        console.log('micro_keywords_main is up on port: ' + port);
 
                     });
 
@@ -132,7 +74,7 @@ let req = http.request({
 req.on('error', function (e) {
 
     console.log('error: ' + e.message);
-    console.log('This app needs mocro_img_scale running on port: 8080');
+    console.log('This app needs mocro_keywords_logger running on port: 8080');
     console.log('The app WILL NOT listen, end of line bye');
 
 });
