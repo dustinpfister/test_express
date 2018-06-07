@@ -7,11 +7,17 @@ app = express();
 
 app.use(require('body-parser').json());
 
+app.get('/', function (req, res) {
+
+    res.send('bar');
+
+});
+
 app.post('/', function (req, res) {
 
     res.json({
 
-        mess: 'okay'
+        mess: 'yes this is dog'
 
     });
 
