@@ -14,20 +14,6 @@ app.use(require('body-parser').raw({
 
     }));
 
-/*
-http.get('http://localhost:8080', function (response) {
-
-console.log('Status:', response.statusCode);
-response.on('data', function (ch) {
-
-console.log(ch.toString())
-
-});
-
-});
-
- */
-
 // okay so a simple get request works if it is running
 let req = http.request({
         hostname: 'localhost',
@@ -38,6 +24,18 @@ let req = http.request({
         res.on('data', function (chunk) {
 
             console.log(chunk.toString());
+
+        });
+
+        res.on('end', function () {
+
+            console.log('looks like we have a response so...');
+
+            app.listen(port, function () {
+
+                console.log('micro_img_main is up on port: ' + port);
+
+            });
 
         });
 
@@ -69,6 +67,29 @@ app.post('/post', function (req, res) {
                 port: 8080,
                 method: 'POST'
 
+            }, function (microRes) {
+
+                let data = '';
+
+                microRes.on('data', function (chunk) {
+
+                    // expect json
+                    data += chunk.toString();
+
+                });
+
+                microRes.on('end', function () {
+
+                    res.json({
+
+                        mess: 'looks like we made it',
+                        data: JSON.parse(data),
+                        success: false
+
+                    });
+
+                });
+
             });
 
         // if error
@@ -98,11 +119,5 @@ app.post('/post', function (req, res) {
         });
 
     }
-
-});
-
-app.listen(port, function () {
-
-    console.log('micro_img_main is up on port: ' + port);
 
 });
