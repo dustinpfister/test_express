@@ -16,30 +16,33 @@ app.use(require('body-parser').raw({
 
 app.post('/post', function (req, res) {
 
-    console.log(typeof req.body);
-
+    // if we have a body to send to the micro service
     if (req.body) {
 
+        // make the post request
         let req = http.request({
 
-                host: 'http://localhost',
+                hostname: 'http://localhost',
+				path: '/',
                 port: 8080,
                 method: 'POST'
 
             });
 
+        // if error
         req.on('error', function (e) {
 
             res.json({
 
-                mess: 'okay error',
-                success: true
+                mess: 'ERROR: ' + e.message,
+                success: false
 
             });
 
         });
 
-        req.on('end', function (e) {
+        // if good
+        req.on('end', function () {
 
             res.json({
 
@@ -50,28 +53,13 @@ app.post('/post', function (req, res) {
 
         });
 
+        // write payload and end
         req.write('foo');
         req.end();
 
-        /*
-        try {
-        req.send();
-
-        } catch (e) {
-
-        res.json({
-
-        mess: 'error tring to send to microtservice',
-        success: false
-
-        });
-
-        }
-         */
-
     } else {
 
-        // no body
+        // else we do not have a body to send
         res.json({
 
             success: false,
@@ -80,23 +68,6 @@ app.post('/post', function (req, res) {
         });
 
     }
-
-    /*
-    req.on('data', function (chunk) {
-
-    console.log(chunk.length);
-
-    });
-     */
-
-    /*
-    res.json({
-
-    mess: 'check cmd'
-
-    });
-
-     */
 
 });
 
