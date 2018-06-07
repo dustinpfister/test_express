@@ -9,7 +9,12 @@ app.use(require('body-parser').json());
 
 app.get('/', function (req, res) {
 
-    res.send('bar');
+    res.json({
+
+        service_name: 'micro_img_scale',
+        port: port
+
+    });
 
 });
 
