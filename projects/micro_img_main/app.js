@@ -14,6 +14,48 @@ app.use(require('body-parser').raw({
 
     }));
 
+/*
+http.get('http://localhost:8080', function (response) {
+
+console.log('Status:', response.statusCode);
+response.on('data', function (ch) {
+
+console.log(ch.toString())
+
+});
+
+});
+
+ */
+
+// okay so a simple get request works if it is running
+let req = http.request({
+        hostname: 'localhost',
+        port: 8080,
+        path: '/'
+    }, function (res) {
+
+        res.on('data', function (chunk) {
+
+            console.log(chunk.toString());
+
+        });
+
+    });
+
+req.on('end', function () {
+
+    console.log('data');
+
+});
+
+req.on('error', function (e) {
+
+    console.log('error: ' + e.message);
+
+});
+req.end();
+
 app.post('/post', function (req, res) {
 
     // if we have a body to send to the micro service
@@ -22,8 +64,8 @@ app.post('/post', function (req, res) {
         // make the post request
         let req = http.request({
 
-                hostname: 'http://localhost',
-				path: '/',
+                hostname: 'localhost',
+                path: '/',
                 port: 8080,
                 method: 'POST'
 
@@ -36,18 +78,6 @@ app.post('/post', function (req, res) {
 
                 mess: 'ERROR: ' + e.message,
                 success: false
-
-            });
-
-        });
-
-        // if good
-        req.on('end', function () {
-
-            res.json({
-
-                mess: 'um... i think we did it',
-                success: true
 
             });
 
