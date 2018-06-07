@@ -99,19 +99,42 @@ let req = http.request({
 
         res.on('end', function () {
 
-            console.log('looks like we have a response so...');
-            console.log(data === 'bar');
+            console.log('looks like we have a response, parsing what should be JSON.');
 
-            app.listen(port, function () {
+            try {
 
-                console.log('micro_img_main is up on port: ' + port);
+                data = JSON.parse(data);
 
-            });
+                console.log(data);
+
+                if (data.service_name === 'micro_img_scale') {
+
+                    console.log('looks good lets listen on port: ' + port);
+
+                    app.listen(port, function () {
+
+                        console.log('micro_img_main is up on port: ' + port);
+
+                    });
+
+                } else {
+
+                    console.log('not what I am looking for sorry');
+
+                }
+
+            } catch (e) {
+
+                console.log(e.message);
+                console.log('error parsing json response');
+
+            }
 
         });
 
     });
 
+// if error log message
 req.on('error', function (e) {
 
     console.log('error: ' + e.message);
