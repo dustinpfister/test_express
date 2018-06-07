@@ -29,17 +29,30 @@ $('#imgSend').on('click', function (e) {
 
     console.log(blob.type);
 
-    var files = $('#imgInp')[0].files;
+    var files = $('#imgInp')[0].files,
+    file;
 
-    $.ajax({
-        type: 'POST',
-        url: '/post',
-        data: blob,
-        processData: false,
-        contentType: false
-    }).done(function (data) {
-        console.log(data);
-    });
+    if (files.length > 0) {
+
+        file = files[0];
+
+        console.log(file.type);
+
+        $.ajax({
+            type: 'POST',
+            url: '/post',
+            data: file,
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            console.log(data);
+        });
+
+    } else {
+
+        console.log('no file');
+
+    }
 
     /*
     var files = $('#imgInp')[0].files;
