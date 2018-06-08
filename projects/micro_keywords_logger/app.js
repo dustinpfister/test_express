@@ -36,8 +36,7 @@ app.post('/', function (req, res) {
 
     res.json({
         success: true,
-        mess: 'post recived',
-        term: req.body
+        mess: 'post recived'
     });
 
 });
