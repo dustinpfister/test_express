@@ -10,12 +10,57 @@ app.use(require('body-parser').json());
 
 app.post('/', function (req, res) {
 
-    res.json({
+    // make the post request
+    let mReq = http.request({
 
-        mess: 'yes this is dog',
-        body: req.body
+            hostname: 'localhost',
+            path: '/',
+            port: 8080,
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            }
+
+        }, function (microRes) {
+
+            let data = '';
+
+            microRes.on('data', function (chunk) {
+
+                // expect json
+                data += chunk.toString();
+
+            });
+
+            microRes.on('end', function () {
+
+                res.json({
+
+                    mess: 'looks like we made it',
+                    data: JSON.parse(data),
+                    success: false
+
+                });
+
+            });
+
+        });
+
+    // if error
+    mReq.on('error', function (e) {
+
+        res.json({
+
+            mess: 'ERROR: ' + e.message,
+            success: false
+
+        });
 
     });
+
+    // write payload and end
+    mReq.write(JSON.stringify(req.body));
+    mReq.end();
 
 });
 
