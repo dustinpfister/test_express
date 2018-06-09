@@ -36,9 +36,9 @@ app.post('/', function (req, res) {
 
                 res.json({
 
-                    mess: 'looks like we made it',
+                    mess: 'response from micro service',
                     data: JSON.parse(data),
-                    success: false
+                    success: true
 
                 });
 

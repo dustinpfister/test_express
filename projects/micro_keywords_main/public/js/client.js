@@ -15,11 +15,13 @@ $('#search_submit').on('click', function () {
 
     }).done(function (res) {
 
-        console.log(res);
+        console.log(res.success);
 
         if (res.success) {
 
-            $('#disp').get(0).innerHTML = res;
+            let dat = res.data.data;
+
+            $('#disp').get(0).innerHTML = dat.keyword + ' : ' + dat.count;
 
         } else {
 
