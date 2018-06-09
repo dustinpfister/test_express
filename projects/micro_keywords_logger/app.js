@@ -32,36 +32,41 @@ app.get('/', function (req, res) {
 // POST incoming keywords
 app.post('/', function (req, res) {
 
+    let resObj = {
+        success: true,
+        mess: '.',
+        data: {}
+    },
+    keyword = req.body.keyword,
+    count = 1;
+
     let record = kw.get('keywords').find({
-            keyword: req.body.keyword
+            keyword: keyword
         });
+
+    resObj.data.keyword = keyword;
 
     if (!record.value()) {
 
+        // write a new record
         kw.get('keywords').push({
 
-            keyword: req.body.keyword,
+            keyword: keyword,
             count: 1
 
         }).write();
-
-        console.log('new keyword: ' + req.body.keyword);
-        console.log('count: ' + 1);
+        resObj.data.count = 1;
 
     } else {
 
+        // add to an existing record
         record.value().count += 1;
+        resObj.data.count = record.value().count;
         kw.write();
-
-        console.log('search for keyword: ' + record.value().keyword);
-        console.log('keyword count : ' + record.value().count);
 
     }
 
-    res.json({
-        success: true,
-        mess: 'post recived'
-    });
+    res.json(resObj);
 
 });
 
