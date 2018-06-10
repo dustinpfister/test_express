@@ -32,20 +32,25 @@ app.get('/', function (req, res) {
 // POST incoming keywords
 app.post('/', function (req, res) {
 
+    // response object to respond with
     let resObj = {
         success: true,
         mess: '.',
         data: {}
     },
-    keyword = req.body.keyword,
-    count = 1;
 
-    let record = kw.get('keywords').find({
+    // the keyword
+    keyword = req.body.keyword,
+
+    // the count of that keyword
+    count = 1,
+
+    // get the record for the given keyword
+    record = kw.get('keywords').find({
             keyword: keyword
         });
 
-    resObj.data.keyword = keyword;
-
+    // get or update the count of the keyword
     if (!record.value()) {
 
         // write a new record
@@ -55,16 +60,18 @@ app.post('/', function (req, res) {
             count: 1
 
         }).write();
-        resObj.data.count = 1;
 
     } else {
 
         // add to an existing record
-        record.value().count += 1;
-        resObj.data.count = record.value().count;
+        count = record.value().count += 1;
         kw.write();
 
     }
+
+    // set the keyword, and count for the response object
+    resObj.data.keyword = keyword;
+    resObj.data.count = count;
 
     res.json(resObj);
 
