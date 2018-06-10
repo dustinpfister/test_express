@@ -34,6 +34,8 @@ mkdirp('db', function () {
             }
         ]
     }).write();
+
+    // posts
     postUsers.defaults({
         posts: []
     }).write();

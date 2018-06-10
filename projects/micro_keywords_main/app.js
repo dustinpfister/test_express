@@ -1,16 +1,18 @@
 let express = require('express'),
 http = require('http'),
-
 port = process.env.PORT || process.argv[2] || 8888,
 app = express();
 
+// serve up the static assets in the public folder
 app.use('/', express.static('public'));
 
+// using body-parser to parse incoming json
 app.use(require('body-parser').json());
 
+// post requests given at root
 app.post('/', function (req, res) {
 
-    // make the post request
+    // make a post request to the service
     let mReq = http.request({
 
             hostname: 'localhost',
@@ -24,38 +26,28 @@ app.post('/', function (req, res) {
         }, function (microRes) {
 
             let data = '';
-
             microRes.on('data', function (chunk) {
-
                 // expect json
                 data += chunk.toString();
-
             });
 
+            // respond with the count
             microRes.on('end', function () {
-
                 res.json({
-
                     mess: 'response from micro service',
                     data: JSON.parse(data),
                     success: true
-
                 });
-
             });
 
         });
 
     // if error
     mReq.on('error', function (e) {
-
         res.json({
-
             mess: 'ERROR: ' + e.message,
             success: false
-
         });
-
     });
 
     // write payload and end
@@ -72,29 +64,22 @@ let req = http.request({
     }, function (res) {
 
         let data = '';
-
         res.on('data', function (chunk) {
-
             data += chunk.toString();
-
         });
 
         res.on('end', function () {
-
             console.log('looks like we have a response, parsing what should be JSON.');
 
             try {
-
                 data = JSON.parse(data);
 
-                console.log(data);
-
+                // if this is the micro servcie
                 if (data.service_name === 'micro_keywords_logger') {
-
                     console.log('looks good lets listen on port: ' + port);
 
+                    // start listening
                     app.listen(port, function () {
-
                         console.log('micro_keywords_main is up on port: ' + port);
 
                     });
