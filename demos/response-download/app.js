@@ -1,4 +1,5 @@
 let express = require('express'),
+path = require('path'),
 port = process.env.PORT || process.argv[2] || 8080,
 app = express();
 
@@ -10,7 +11,7 @@ app.get('/', function (req, res) {
 
 app.get('/getdoc', function (req, res) {
 
-    res.download('./docs/doc1.txt', function (err) {
+    res.download(path.join(__dirname, 'docs/doc1.txt'), function (err) {
 
         console.log(err);
 
