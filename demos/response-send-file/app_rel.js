@@ -5,9 +5,7 @@ app = express();
 
 app.get('/', function (req, res) {
 
-    //let p = path.join(__dirname, 'img/face1.png');
-
-    // send a png file
+    // send a png file via relative path
     res.sendFile('face1.png', {
 
         root: './img'
