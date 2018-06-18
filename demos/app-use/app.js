@@ -1,23 +1,9 @@
 let express = require('express'),
 app = express();
 
-// custom middle ware that sets a req.useClient value
-app.use(function (req, res, next) {
-
-    let agent = req.get('user-agent').toLowerCase();
-
-    req.useClient = 'generic';
-
-    // use a bootstrap client, but only for chrome users
-    if (agent.indexOf('chrome') > -1) {
-
-        req.useClient = 'bootstrap';
-
-    }
-
-    next();
-
-});
+// using the custom middle ware
+// to have a req.useClient value
+app.use(require('./set-client.js'));
 
 app.get('/', function (req, res) {
 
