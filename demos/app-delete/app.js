@@ -10,6 +10,7 @@ app.use('/', express.static('public'));
 
 app.use(require('./routes/post.js'));
 app.use(require('./routes/file.js'));
+app.use(require('./routes/delete.js'));
 
 // start listening
 app.listen(app.get('port'), function () {
