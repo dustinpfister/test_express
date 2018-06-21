@@ -27,8 +27,31 @@ var getFile = function () {
             } catch (e) {
 
                 console.log(e.message);
+				get('text').value = e.message;
 
             }
+
+        }
+
+    };
+
+    xhr.send(null);
+
+};
+
+// send a delete request
+var deleteFile = function (e) {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('delete', '/file');
+
+    xhr.onreadystatechange = function () {
+
+        if (this.readyState === 4) {
+
+            console.log(this.response);
+            getFile();
 
         }
 
@@ -67,5 +90,7 @@ var sendPost = function (e) {
 
 // attach
 get('post').addEventListener('click', sendPost);
+get('delete').addEventListener('click', deleteFile);
 
+// first get
 getFile();

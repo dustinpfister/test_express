@@ -9,8 +9,32 @@ app.set('mess', '');
 
 app.delete ('/file', function (req, res, next) {
 
-    console.log('oh look a delete request');
+    fs.unlink(app.get('file-path'), function (e) {
 
-    res.send('umm');
+        if (e) {
+
+            app.set('mess', e.message);
+            next();
+
+        } else {
+
+            res.json({
+
+                mess: 'file deleted',
+                path: app.get('file-path')
+
+            });
+
+        }
+
+    });
+
+}, function (req, res) {
+
+    res.json({
+
+        mess: app.get('mess')
+
+    });
 
 });
