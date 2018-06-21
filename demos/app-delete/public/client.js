@@ -27,7 +27,7 @@ var getFile = function () {
             } catch (e) {
 
                 console.log(e.message);
-				get('text').value = e.message;
+                get('text').value = e.message;
 
             }
 
@@ -50,7 +50,10 @@ var deleteFile = function (e) {
 
         if (this.readyState === 4) {
 
+            console.log('status: ' + this.status);
             console.log(this.response);
+
+            // confirm
             getFile();
 
         }
