@@ -1,18 +1,68 @@
 let express = require('express'),
+path = require('path'),
+fs = require('fs'),
 
 app = module.exports = express();
 
-app.use(require('body-parser').json());
+//app.use(require('body-parser').json());
 
-app.post('/post', function (req, res) {
+app.post('/post',
 
-    console.log(req.body);
+    // check body
+    function (req, res, next) {
 
-    res.json({
+        if (req.body) {
 
-        foo: 'bar',
-        body: req.body
+            if (req.body.mess) {
 
-    });
+                next();
 
-});
+            }else{
+
+                res.json({
+
+                    mess: 'no message given',
+                    body: req.body
+
+                });
+
+            }
+
+        }else{
+
+            res.json({
+
+                mess: 'no body parsed',
+                body: req.body
+
+            });
+
+        }
+
+    },
+
+    // write file
+    function (req, res) {
+
+        fs.writeFile(path.join(__dirname, 'file.txt'), req.body.mess, 'utf8', function (e) {
+
+            var mess = 'looks good';
+            if (e) {
+
+                mess = e.message;
+
+            }
+
+            // respond
+            res.json({
+
+                mess: mess,
+                body: req.body
+
+            });
+
+        });
+
+    }
+
+);

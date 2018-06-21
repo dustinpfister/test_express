@@ -8,7 +8,11 @@ document.getElementById('post').addEventListener('click', function (e) {
 
     xhr.onreadystatechange = function () {
 
-        console.log(this);
+        if(this.readyState === 4){
+			
+			
+			
+		}
 
     };
 
