@@ -19,6 +19,17 @@ var getFile = function () {
 
             console.log(this.response);
 
+            try {
+
+                var data = JSON.parse(this.response);
+                get('text').value = data.text;
+
+            } catch (e) {
+
+                console.log(e.message);
+
+            }
+
         }
 
     };
@@ -40,6 +51,7 @@ var sendPost = function (e) {
         if (this.readyState === 4) {
 
             console.log(this.response);
+            getFile();
 
         }
 
@@ -55,3 +67,5 @@ var sendPost = function (e) {
 
 // attach
 get('post').addEventListener('click', sendPost);
+
+getFile();
