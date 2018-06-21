@@ -4,7 +4,7 @@ fs = require('fs'),
 
 app = module.exports = express();
 
-//app.use(require('body-parser').json());
+app.use(require('body-parser').json());
 
 app.post('/post',
 

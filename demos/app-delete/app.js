@@ -9,6 +9,7 @@ app.set('port', process.argv[2] || process.env.PORT || 8080);
 app.use('/', express.static('public'));
 
 app.use(require('./routes/post.js'));
+app.use(require('./routes/file.js'));
 
 // start listening
 app.listen(app.get('port'), function () {

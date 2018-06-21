@@ -1,7 +1,29 @@
 
+// warping document.getElementById
 var get = function (id) {
 
     return document.getElementById(id);
+
+};
+
+// get the file
+var getFile = function () {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('get', '/file');
+
+    xhr.onreadystatechange = function () {
+
+        if (this.readyState === 4) {
+
+            console.log(this.response);
+
+        }
+
+    };
+
+    xhr.send(null);
 
 };
 
@@ -24,7 +46,10 @@ var sendPost = function (e) {
     };
 
     //xhr.send(JSON.stringify({mess: 'i am the egg man.'}));
-    xhr.send(null);
+    //xhr.send(null);
+    xhr.send(JSON.stringify({
+            mess: get('text').value
+        }));
 
 };
 
