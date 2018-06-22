@@ -1,0 +1,19 @@
+<h1>Express Project Settings</h1>
+
+<h2>Main App:</h2>
+<ul>
+<% Object.keys(settings.app).forEach(function(key){ %>
+
+    <li>key: <%= key %> : <%= settings.app[key] %></li>
+
+<% }); %>
+</ul>
+
+<h2>Render App:</h2>
+<ul>
+<% Object.keys(settings.renderApp).forEach(function(key){ %>
+
+    <li>key: <%= key %> : <%= settings.renderApp[key] %></li>
+
+<% }); %>
+</ul>
