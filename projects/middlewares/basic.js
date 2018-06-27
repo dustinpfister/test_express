@@ -10,7 +10,7 @@ app.use(function (req, res, next) {
     req.obj = {
 
         platform: process.platform,
-		arch : process.arch
+        arch: process.arch
 
     };
 
