@@ -14,7 +14,8 @@ middleware({
 
         res.json({
 
-            mess: 'foo'
+            mess: 'foo',
+            middle: req.middle
 
         });
 

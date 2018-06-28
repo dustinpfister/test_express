@@ -1,9 +1,10 @@
 
 let path = require('path'),
 mkdirp = require('mkdirp'),
-fs = require('fs'),
+fs = require('fs');
 
-ensureDir = function (dir) {
+// ensure a dir is there
+let ensureDir = function (dir) {
 
     return new Promise(function (resolve, reject) {
 
@@ -25,6 +26,29 @@ ensureDir = function (dir) {
 
 };
 
+// read the contents of the txt folder
+let readTXTFolder = function (options) {
+
+    return new Promise(function (resolve, reject) {
+
+        fs.readdir(options.dir_txt, 'utf8', function (e, files) {
+
+            if (e) {
+
+                reject(e.message);
+
+            } else {
+
+                resolve(files)
+
+            }
+
+        });
+
+    });
+
+}
+
 module.exports = function (options) {
 
     options = options || {};
@@ -34,15 +58,32 @@ module.exports = function (options) {
     return ensureDir(options.dir_txt).then(function () {
 
         // return the functioning middle ware
-        return function (req, res,next) {
+        return function (req, res, next) {
 
-            req.middle = {
+            readTXTFolder(options).then(function (files) {
 
-                mess: 'foo'
+                req.middle = {
 
-            };
+                    mess: 'got the filenames',
+                    files: files
 
-            next();
+                };
+
+                next();
+
+            }).catch (function (eMess) {
+
+                req.middle = {
+
+                    mess: 'error',
+                    eMess: eMess,
+                    files: []
+
+                };
+
+                next();
+
+            });
 
         }
 
