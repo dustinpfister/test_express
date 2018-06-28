@@ -49,8 +49,10 @@ let readTXTFolder = function (options) {
 
 }
 
+// exporting this
 module.exports = function (options) {
 
+    // the options
     options = options || {};
     options.dir_txt = options.dir_txt || 'txt';
 
@@ -87,12 +89,18 @@ module.exports = function (options) {
 
         }
 
-    }).catch (function () {
+    }).catch (function (eMess) {
 
         // return this if something goes wrong
         return function (req, res, next) {
 
-            req.middle = {};
+            req.middle = {
+
+                mess: 'something went wrong',
+                eMess: eMess,
+                files: []
+
+            };
 
             next();
 
