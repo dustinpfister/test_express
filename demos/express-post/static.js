@@ -4,9 +4,9 @@ app = express();
 // using the JSON body parser
 app.use(require('body-parser').json());
 
-// using basic.html to serve as the index of root at /
+// using static.html to serve as the index of root at /
 app.use('/', express.static('public', {
-        index: 'basic.html'
+        index: 'static.html'
     }));
 
 // using app.post to define express post requests
@@ -17,5 +17,5 @@ app.post('/', (req, res) => {
 });
 
 app.listen(8080, () => {
-    console.log('express post basic example up on port 8080');
+    console.log('express static basic example up on port 8080');
 });
