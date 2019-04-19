@@ -4,7 +4,7 @@ app = express();
 
 app.use((req, res, next) => {
     req.pack = {};
-    fs.readFile('package.json', 'utf8', function (e, json) {
+    fs.readFile('package.json', 'utf8', (e, json) => {
         if (e) {
             next();
         } else {
@@ -15,5 +15,4 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => res.json(req.pack));
-
 app.listen(8080);
