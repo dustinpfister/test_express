@@ -1,12 +1,11 @@
 let express = require('express'),
 app = express();
 
+// express middleware basic example
 app.use((req, res, next) => {
-    console.log('***** I am middleware *****');
-	console.log('a ' + req.method + ' request was made to ' + req.path);
-    console.log('***************************');
+    req.rnd = Math.random() + '';
     next();
 });
 
-app.get('/', (req, res) => res.send('foo'));
-app.listen(8080, () => console.log('express middeware basics example up on port 8080'));
+app.get('/', (req, res) => res.send(req.rnd));
+app.listen(8080);
