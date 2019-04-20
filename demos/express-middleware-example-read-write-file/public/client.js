@@ -1,4 +1,4 @@
-var getIt = function (obj, cb) {
+var getIt = function (cb) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/file', true);
     xhr.onreadystatechange = function () {
@@ -7,7 +7,6 @@ var getIt = function (obj, cb) {
         }
     };
     xhr.send();
-
 };
 
 var postIt = function (obj, cb) {
@@ -23,11 +22,19 @@ var postIt = function (obj, cb) {
 
 };
 
+var el_text = document.getElementById('text'),
+el_button_save = document.getElementById('button_save');
 
-postIt({
-    text: 'foo'
-}, function (res) {
+getIt(function (res) {
+    el_text.value = res;
+});
 
-    console.log(res);
+el_button_save.addEventListener('click', function () {
 
-})
+    postIt({
+        text: text.value
+    }, function (res) {
+        console.log(res);
+    });
+
+});
