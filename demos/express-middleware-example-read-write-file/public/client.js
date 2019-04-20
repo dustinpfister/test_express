@@ -22,3 +22,12 @@ var postIt = function (obj, cb) {
     xhr.send(JSON.stringify(obj));
 
 };
+
+
+postIt({
+    text: 'foo'
+}, function (res) {
+
+    console.log(res);
+
+})

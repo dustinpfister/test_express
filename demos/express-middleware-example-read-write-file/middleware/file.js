@@ -3,8 +3,9 @@ fs = require('fs'),
 dir_file = './file.txt';
 
 router = module.exports = express.Router();
+router.use(require('body-parser').json());
 
-router.get('*', function (req, res, next) {
+router.get('*', function (req, res) {
 
     fs.readFile(dir_file, 'utf-8', (e, text) => {
 
@@ -22,10 +23,13 @@ router.get('*', function (req, res, next) {
 
 });
 
-router.post('*', function (req, res, next) {
+router.post('*', function (req, res) {
 
-    console.log('post from: ' + req.url);
+    fs.writeFile(dir_file, req.body.text, (e) => {
 
-    next();
+        res.send(JSON.stringify({
+                e: e
+            }))
+    });
 
 });
