@@ -1,7 +1,5 @@
 let express = require('express'),
-
 app = express();
-
 
 app.use((req, res, next) => {
     // populating something  on req
