@@ -53,7 +53,8 @@ router.get('*', [
                     req.data.mess = e.message;
                     next();
                 } else {
-                    req.data.html = marked(md.replace(/---/g, ''));
+					md = md.replace(/---/g, '');
+                    req.data.html = marked(md).replace(/<a [^>]*>|<\/a>/g,'');
                     // full pattern matches
                     req.data.keywords.forEach((kw) => {
                         req.data.html = req.data.html.replace(
