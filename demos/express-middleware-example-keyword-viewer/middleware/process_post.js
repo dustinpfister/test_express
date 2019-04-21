@@ -53,9 +53,16 @@ router.get('*', [
                     req.data.mess = e.message;
                     next();
                 } else {
-					md = md.replace(/---/g, '');
-                    req.data.html = marked(md).replace(/<a [^>]*>|<\/a>/g,'');
-                    // full pattern matches
+                    // remove headers from markdown
+                    md = md.replace(/---/g, '');
+
+                    // create html from markdown
+                    req.data.html = marked(md);
+
+                    // remove a tags
+                    req.data.html = req.data.html.replace(/<a [^>]*>|<\/a>/g, '');
+
+                    // highlight full pattern matches with span elements
                     req.data.keywords.forEach((kw) => {
                         req.data.html = req.data.html.replace(
                                 new RegExp(kw.keyword, 'g'),
