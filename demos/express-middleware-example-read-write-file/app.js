@@ -5,5 +5,4 @@ app.use('/', express.static('public'));
 
 app.use('/file', require('./file.js'))
 
-
 app.listen(8080);

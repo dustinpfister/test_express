@@ -8,10 +8,6 @@ app.use((req, res, next) => {
 
 });
 
-app.all('*', (req, res, next) => {
-
-    res.send(req.n + '');
-
-});
+app.all('*', (req, res, next) => res.send(req.n + ''));
 
 app.listen(8080);
