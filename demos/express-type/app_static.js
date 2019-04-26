@@ -8,6 +8,8 @@ app.use('/js', express.static('public/js', {
             res.type('js');
             console.log(res.get('Content-Type'));
             // application/javascript; charset=utf-8
+            res.set('Content-Type', 'text/javaScript');
+            console.log(res.get('Content-Type'));
         }
     }));
 
