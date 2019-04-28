@@ -1,3 +1,4 @@
+// https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 let express = require('express'),
 app = express();
 
@@ -13,7 +14,7 @@ app.get('/foo', (req, res) => {
 app.get('*', (req, res) => {
     console.log(res.statusCode); // 200
     res.status(404).end();
-    console.log(res.statusCode); // 403
+    console.log(res.statusCode); // 404
 });
 
 app.listen(8080);
