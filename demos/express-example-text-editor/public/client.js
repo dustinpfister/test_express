@@ -21,6 +21,6 @@ var get = function (idu, done) {
 };
 
 // get
-get({mess:'foo'}, function (err, res) {
+get({action:'foo',mess:'foo'}, function (err, res) {
     get('text_edit').value = res;
 });
