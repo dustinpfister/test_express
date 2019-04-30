@@ -4,7 +4,7 @@ fs = require('fs'),
 app = express();
 
 app.set('dir', process.cwd());
-app.set('fn', 'package.json');
+app.set('fn', 'newfile.txt');
 app.set('encode', 'utf8');
 
 // hosting public folder

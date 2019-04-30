@@ -8,10 +8,20 @@ var get = function (idu, done) {
         xhr.open('POST', '/data', true);
         xhr.onreadystatechange = function () {
             if (this.readyState === 4) {
-                if (this.status === 200) {
-                    done.call(this, null, this.response, xhr);
-                } else {
-                    done.call(this, new Error('statusCode: ' + this.status), this.response, xhr);
+                try {
+
+                    var reply = JSON.parse(this.response);
+
+                    if (this.status === 200) {
+                        done.call(this, null, reply, xhr);
+                    } else {
+                        done.call(this, new Error('status code: ' + this.status + ' mess: ' + reply.mess), reply, xhr);
+                    }
+
+                } catch (e) {
+
+                    done.call(this, new Error('Error parsing JSON'), reply, xhr);
+
                 }
             }
         };
@@ -28,11 +38,11 @@ get({
 
     if (err) {
 
-        get('text_edit').value = res;
+        get('text_edit').value = err;
 
     } else {
 
-        get('text_edit').value = JSON.parse(res).data;
+        get('text_edit').value = res.data;
 
     }
 });
