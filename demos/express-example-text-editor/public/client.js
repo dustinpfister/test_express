@@ -33,7 +33,7 @@ var get = function (idu, done) {
 // get
 get({
     action: 'open',
-    mess: 'foo'
+	data: 'this is the new file'
 }, function (err, res) {
 
     if (err) {

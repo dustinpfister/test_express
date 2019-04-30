@@ -20,25 +20,21 @@ app.post('/data',
 
         // create reply object, and check for body
         (req, res, next) => {
-
             // Create reply object
             res.reply = {
                 success: false,
                 mess: 'no body object populated.'
             };
-
             // check for body or next
             if (!req.body) {
                 res.status(400).json(res.reply);
             } else {
                 next();
             }
-
         },
 
         // if no action
         (req, res, next) => {
-
             // If no action Action, or next
             if (!req.body.action) {
                 res.reply.mess = 'An action must be given';
@@ -46,13 +42,12 @@ app.post('/data',
             } else {
                 next();
             }
-
         },
 
         // if action : 'open'
         (req, res, next) => {
-            // if action is 'open'
             if (req.body.action === 'open') {
+                // try to open the current filename at the current dir
                 fs.readFile(path.join(app.get('dir'), app.get('fn')), app.get('encode'), (e, data) => {
                     if (e) {
                         res.reply.mess = e.message;
@@ -69,7 +64,34 @@ app.post('/data',
             }
         },
 
-        // unkown action
+        // if action : 'save'
+        (req, res, next) => {
+            if (req.body.action === 'save') {
+                // if we have data
+                if (req.body.data) {
+                    // try to save the data
+                    fs.writeFile(path.join(app.get('dir'), app.get('fn')), req.body.data, (e) => {
+                        if (e) {
+                            res.reply.mess = e.message;
+                            res.status(400).json(res.reply);
+                        } else {
+                            res.reply.success = true;
+                            res.reply.mess = 'save file success';
+                            res.reply.data = req.body.data;
+                            res.status(200).json(res.reply);
+                        }
+                    })
+                } else {
+                    // else we do not have data to save
+                    res.reply.mess = 'must have data to save';
+                    res.status(400).json(res.reply);
+                }
+            } else {
+                next();
+            }
+        },
+
+        // unknown action
         (req, res, next) => {
             res.reply.mess = 'The action given is not known';
             res.status(400).json(res.reply);
