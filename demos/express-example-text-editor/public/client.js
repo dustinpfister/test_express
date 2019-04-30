@@ -21,6 +21,18 @@ var get = function (idu, done) {
 };
 
 // get
-get({action:'foo',mess:'foo'}, function (err, res) {
-    get('text_edit').value = res;
+get({
+    action: 'open',
+    mess: 'foo'
+}, function (err, res) {
+
+    if (err) {
+
+        get('text_edit').value = res;
+
+    } else {
+
+        get('text_edit').value = JSON.parse(res).data;
+
+    }
 });

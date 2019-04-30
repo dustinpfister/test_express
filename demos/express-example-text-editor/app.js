@@ -1,5 +1,11 @@
 let express = require('express'),
+path = require('path'),
+fs = require('fs'),
 app = express();
+
+app.set('dir', process.cwd());
+app.set('fn', 'package.json');
+app.set('encode', 'utf8');
 
 // hosting public folder
 app.use('/', express.static('public'));
@@ -43,9 +49,29 @@ app.post('/data',
 
         },
 
+        // if action : 'open'
+        (req, res, next) => {
+            // if action is 'open'
+            if (req.body.action === 'open') {
+                fs.readFile(path.join(app.get('dir'), app.get('fn')), app.get('encode'), (e, data) => {
+                    if (e) {
+                        res.reply.mess = e.message;
+                        res.status(400).json(res.reply);
+                    } else {
+                        res.reply.success = true;
+                        res.reply.mess = 'opened and sent file data';
+                        res.reply.data = data;
+                        res.status(200).json(res.reply);
+                    }
+                });
+            } else {
+                next();
+            }
+        },
+
         // unkown action
         (req, res, next) => {
-            res.mess = 'The action given is not known';
+            res.reply.mess = 'The action given is not known';
             res.status(400).json(res.reply);
         }
 
