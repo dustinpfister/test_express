@@ -6,6 +6,7 @@ var menuItems = [
     {
         name: 'file',
         options: [
+
             // open file
             {
                 name: 'open',
@@ -14,21 +15,33 @@ var menuItems = [
                     get({
                         action: 'open'
                     }, function (err, res) {
-
                         if (err) {
-
                             get('text_edit').value = err;
-
                         } else {
-
                             get('text_edit').value = res.data;
-
                         }
                     });
-
                 }
+            },
 
-            }
+            // save file
+            {
+                name: 'save',
+                onActive: function () {
+                    // Just using get
+                    get({
+                        action: 'save',
+                        data: get('text_edit').value
+                    }, function (err, res) {
+                        if (err) {
+                            get('text_edit').value = err;
+                        } else {
+                            get('text_edit').value = res.data;
+                        }
+                    });
+                }
+            },
+
         ]
 
     }
