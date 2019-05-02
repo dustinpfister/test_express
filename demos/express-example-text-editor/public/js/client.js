@@ -1,48 +1,52 @@
-var get = function (idu, done) {
-    // if one argument get is a wrapper for document.getElementById
-    if (arguments.length === 1) {
-        return document.getElementById(idu);
-    } else {
-        // if two arguments get is used to make post requests
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/data', true);
-        xhr.onreadystatechange = function () {
-            if (this.readyState === 4) {
-                try {
 
-                    var reply = JSON.parse(this.response);
+// Menu Items
+var menuItems = [
 
-                    if (this.status === 200) {
-                        done.call(this, null, reply, xhr);
-                    } else {
-                        done.call(this, new Error('status code: ' + this.status + ' mess: ' + reply.mess), reply, xhr);
-                    }
+    // File Munu
+    {
+        name: 'file',
+        options: [
+            // open file
+            {
+                name: 'open',
+                onActive: function () {
+                    // Just using get
+                    get({
+                        action: 'open'
+                    }, function (err, res) {
 
-                } catch (e) {
+                        if (err) {
 
-                    done.call(this, new Error('Error parsing JSON'), reply, xhr);
+                            get('text_edit').value = err;
+
+                        } else {
+
+                            get('text_edit').value = res.data;
+
+                        }
+                    });
 
                 }
+
             }
-        };
-        xhr.setRequestHeader('Content-type', 'application/json');
-        xhr.send(JSON.stringify(idu));
-    }
-};
-
-// get
-get({
-    action: 'open',
-	data: 'this is the new file'
-}, function (err, res) {
-
-    if (err) {
-
-        get('text_edit').value = err;
-
-    } else {
-
-        get('text_edit').value = res.data;
+        ]
 
     }
+];
+
+// HTML for menu
+var el_menu = get('menu');
+menuItems.forEach(function (item) {
+
+    var div = document.createElement('div');
+    div.id = 'menu_' + item.name;
+    div.className = 'menu_item';
+    div.innerHTML = item.name;
+    div.addEventListener('click', function () {
+
+        console.log('foo');
+
+    })
+    el_menu.appendChild(div);
+
 });
