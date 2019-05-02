@@ -3,6 +3,8 @@ path = require('path'),
 fs = require('fs'),
 app = express();
 
+app.set('port', process.argv[2] || process.env.PORT || 8080);
+
 app.set('dir', process.cwd());
 app.set('fn', 'newfile.txt');
 app.set('encode', 'utf8');
@@ -99,4 +101,4 @@ app.post('/data',
 
     ]);
 
-app.listen(8080);
+app.listen(app.get('port'), () => console.log('example text editor is up on port: ' + app.get('port')));
