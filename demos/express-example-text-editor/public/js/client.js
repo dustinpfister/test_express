@@ -64,13 +64,20 @@ menuItems.forEach(function (item) {
     var div_options = document.createElement('div');
     div_options.style.visibility = 'hidden';
     //div_options.className = 'menu_options'
+
+    // for each option
     item.options.forEach(function (opt) {
 
         var div_opt = document.createElement('div');
         //div_opt.className = 'menu_text';
         div_opt.innerHTML = opt.name;
+
+        div_opt.addEventListener('click', function (e) {
+            // call the active function for that option
+            opt.onActive();
+        });
+
         div_options.appendChild(div_opt);
-        //div_opt.
 
     });
 
