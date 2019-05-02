@@ -9,8 +9,9 @@ app.set('dir', process.cwd());
 app.set('fn', 'newfile.txt');
 app.set('encode', 'utf8');
 
-// hosting public folder
-app.use('/', express.static('public'));
+// hosting static assets for the client system 
+app.use('/js', express.static('public/js'));
+app.use('/', express.static('public/html'));
 
 // body parser
 app.use(require('body-parser').json());
