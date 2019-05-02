@@ -1,0 +1,26 @@
+* {
+    background: black;
+    color: white;
+	padding:0px;
+	margin:0px;
+}
+
+.menu{
+	position:relative;
+	width: 100%;
+	height:20px;
+	background:white;
+	color:black;
+}
+
+.menu_item{
+	position:static;
+	display: inline-block;
+	width:50px;
+	background:white;
+	color:black;
+}
+
+.editor{
+	position:relative;
+}
