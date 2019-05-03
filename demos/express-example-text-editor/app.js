@@ -9,7 +9,7 @@ app.set('dir', process.cwd());
 app.set('fn', 'newfile.txt');
 app.set('encode', 'utf8');
 
-// hosting static assets for the client system 
+// hosting static assets for the client system
 app.use('/js', express.static('public/js'));
 app.use('/', express.static('public/html'));
 
@@ -92,6 +92,19 @@ app.post('/data',
             } else {
                 next();
             }
+        },
+
+        // if action : 'list' - to list files in current dir
+        (req, res, next) => {
+            if (req.body.action === 'list') {
+				
+				
+			}else{
+				
+				next();
+				
+			}
+
         },
 
         // unknown action
