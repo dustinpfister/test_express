@@ -42,6 +42,24 @@ var menuItems = [
                 }
             },
 
+            // file list
+            {
+                name: 'list',
+                onActive: function () {
+                    // Just using get
+                    get({
+                        action: 'list',
+                        data: get('text_edit').value
+                    }, function (err, res) {
+                        if (err) {
+                            get('text_edit').value = err;
+                        } else {
+                            get('text_edit').value = res.data;
+                        }
+                    });
+                }
+            },
+
         ]
 
     }

@@ -97,14 +97,20 @@ app.post('/data',
         // if action : 'list' - to list files in current dir
         (req, res, next) => {
             if (req.body.action === 'list') {
-				
-				
-			}else{
-				
-				next();
-				
-			}
-
+                fs.readdir(path.resolve(app.get('dir')), (e, files) => {
+                    if (e) {
+                        res.reply.mess = e.message;
+                        res.status(400).json(res.reply);
+                    } else {
+                        res.reply.success = true;
+                        res.reply.mess = 'list sent';
+                        res.reply.data = files
+                        res.status(200).json(res.reply);
+                    }
+                });
+            } else {
+                next();
+            }
         },
 
         // unknown action
