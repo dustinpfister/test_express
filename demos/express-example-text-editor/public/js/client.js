@@ -2,7 +2,7 @@
 // Menu Items
 var menuItems = [
 
-    // File Munu
+    // File Menu
     {
         name: 'file',
         options: [
@@ -55,13 +55,13 @@ var menuItems = [
                             //get('text_edit').value = err;
                         } else {
                             //get('text_edit').value = res.data;
-							var html = '';
-							res.data.forEach(function(fn){
-								
-								html += '<span>'+fn+'<\/span><br>';
-								
-							});
-							get('filelist').innerHTML = html;
+                            var html = '';
+                            res.data.forEach(function (fn) {
+
+                                html += '<span>' + fn + '<\/span><br>';
+
+                            });
+                            get('filelist').innerHTML = html;
                         }
                     });
                 }
@@ -89,10 +89,17 @@ menuItems.forEach(function (item) {
         div_opt = div.children[0];
 
         if (div_opt) {
+			/*
             if (div_opt.style.visibility === 'hidden') {
                 div_opt.style.visibility = 'visible';
             } else {
                 div_opt.style.visibility = 'hidden';
+            }
+			*/
+			if (div_opt.style.display === 'block') {
+                div_opt.style.display = 'none';
+            } else {
+                div_opt.style.display = 'block';
             }
         }
 
@@ -100,7 +107,8 @@ menuItems.forEach(function (item) {
 
     // options menu for the menu item
     var div_options = document.createElement('div');
-    div_options.style.visibility = 'hidden';
+    //div_options.style.visibility = 'hidden';
+	div_options.style.display = 'none';
     //div_options.className = 'menu_options'
 
     // for each option
