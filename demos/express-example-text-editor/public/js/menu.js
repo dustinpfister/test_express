@@ -8,7 +8,7 @@ var Menu = (function () {
         console.log(text)
     };
     api.error = function (eMess) {
-        get('text_mess').innerHTML = eMess;
+        get('text_emess').innerHTML = eMess;
     }
 
     // Open the file that is at the current
@@ -18,6 +18,7 @@ var Menu = (function () {
         // be whatever is set server side
         opt = opt || {};
         get('text_mess').innerHTML = '';
+        get('text_emess').innerHTML = '';
         get({
             payload: {
                 action: 'open',
@@ -27,6 +28,7 @@ var Menu = (function () {
             onDone: function (text, resObj) {
                 get('text_edit').value = text;
                 get('text_fn').value = resObj.fn;
+                get('text_mess').innerHTML = resObj.mess;
             },
             onError: api.error
         });
@@ -36,6 +38,7 @@ var Menu = (function () {
 
         opt = opt || {};
         get('text_mess').innerHTML = '';
+        get('text_emess').innerHTML = '';
         get({
             payload: {
                 action: 'save',
@@ -45,6 +48,7 @@ var Menu = (function () {
             },
             onDone: function (text, resObj) {
                 get('text_edit').value = text;
+                get('text_mess').innerHTML = resObj.mess;
             },
             onError: api.error
         });
@@ -55,6 +59,7 @@ var Menu = (function () {
 
         opt = opt || {};
         get('text_mess').innerHTML = '';
+        get('text_emess').innerHTML = '';
         get({
             payload: {
                 action: 'list'
