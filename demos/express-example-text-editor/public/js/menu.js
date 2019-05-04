@@ -2,13 +2,33 @@
 // back end system for the editor
 var Menu = (function () {
 
+    // set + clear messages
+    var mess = (function () {
+        var el_mess = get('text_mess'),
+        el_eMess = get('text_emess');
+        var func = function (mess) {
+            el_mess.innerHTML = mess;
+        };
+        func.eMess = function (eMess) {
+            el_eMess.innerHTML = eMess;
+        };
+        func.clear = function () {
+            el_mess.innerHTML = '';
+            el_eMess.innerHTML = '';
+        };
+        return func;
+    }
+        ());
+
+    // public api
     var api = {};
     api.noop = function () {};
     api.done = function (text) {
         console.log(text)
     };
     api.error = function (eMess) {
-        get('text_emess').innerHTML = eMess;
+        console.log(eMess);
+        mess.eMess(eMess);
     }
 
     // Open the file that is at the current
@@ -17,8 +37,7 @@ var Menu = (function () {
         // if null for dir or fn the default will
         // be whatever is set server side
         opt = opt || {};
-        get('text_mess').innerHTML = '';
-        get('text_emess').innerHTML = '';
+        mess.clear();
         get({
             payload: {
                 action: 'open',
@@ -28,7 +47,7 @@ var Menu = (function () {
             onDone: function (text, resObj) {
                 get('text_edit').value = text;
                 get('text_fn').value = resObj.fn;
-                get('text_mess').innerHTML = resObj.mess;
+                mess(resObj.mess);
             },
             onError: api.error
         });
@@ -37,8 +56,7 @@ var Menu = (function () {
     api.Save = function (opt) {
 
         opt = opt || {};
-        get('text_mess').innerHTML = '';
-        get('text_emess').innerHTML = '';
+        mess.clear();
         get({
             payload: {
                 action: 'save',
@@ -48,7 +66,7 @@ var Menu = (function () {
             },
             onDone: function (text, resObj) {
                 get('text_edit').value = text;
-                get('text_mess').innerHTML = resObj.mess;
+                mess(resObj.mess);
             },
             onError: api.error
         });
@@ -58,14 +76,14 @@ var Menu = (function () {
     api.List = function (opt) {
 
         opt = opt || {};
-        get('text_mess').innerHTML = '';
-        get('text_emess').innerHTML = '';
+        mess.clear();
         get({
             payload: {
                 action: 'list'
             },
-            onDone: function (text, resObj) {
-                get('text_edit').value = text;
+            onDone: function (files, resObj) {
+                //get('text_edit').value = text;
+                //mess(files);
             },
             onError: api.error
         });
