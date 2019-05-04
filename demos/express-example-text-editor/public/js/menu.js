@@ -26,7 +26,6 @@ var Menu = (function () {
             },
             onDone: function (text, resObj) {
                 get('text_edit').value = text;
-                //console.log(resObj);
                 get('text_fn').value = resObj.fn;
             },
             onError: api.error
@@ -46,8 +45,22 @@ var Menu = (function () {
             },
             onDone: function (text, resObj) {
                 get('text_edit').value = text;
-                //console.log(resObj);
-                //get('text_fn').value = resObj.fn;
+            },
+            onError: api.error
+        });
+
+    };
+
+    api.List = function (opt) {
+
+        opt = opt || {};
+        get('text_mess').innerHTML = '';
+        get({
+            payload: {
+                action: 'list'
+            },
+            onDone: function (text, resObj) {
+                get('text_edit').value = text;
             },
             onError: api.error
         });
