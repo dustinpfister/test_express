@@ -65,6 +65,8 @@ app.post('/data',
                         res.reply.success = true;
                         res.reply.mess = 'opened and sent file data';
                         res.reply.data = data;
+                        res.reply.fn = app.get('fn');
+                        res.reply.dir = app.get('dir');
                         res.status(200).json(res.reply);
                     }
                 });

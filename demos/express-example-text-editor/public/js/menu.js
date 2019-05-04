@@ -23,8 +23,10 @@ var Menu = (function () {
                 dir: opt.dir || null,
                 fn: opt.fn || null
             },
-            onDone: function (text) {
+            onDone: function (text, resObj) {
                 get('text_edit').value = text;
+                //console.log(resObj);
+                get('text_fn').value = resObj.fn;
             },
             onError: api.error
         });
