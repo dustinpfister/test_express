@@ -8,8 +8,6 @@ app.get('/', (req, res) => {
     res.json({
         foo: 'bar'
     });
-	console.log(res.get('Content-Type'))
-	
 });
 // listen
 app.listen(app.get('port'), () => console.log('app up on port: ' + app.get('port')));
