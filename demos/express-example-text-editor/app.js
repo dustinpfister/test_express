@@ -50,6 +50,12 @@ app.post('/data',
         // if action : 'open'
         (req, res, next) => {
             if (req.body.action === 'open') {
+
+                // set fn if given
+                if (req.body.fn) {
+                    app.set('fn', req.body.fn);
+                }
+
                 // try to open the current filename at the current dir
                 fs.readFile(path.join(app.get('dir'), app.get('fn')), app.get('encode'), (e, data) => {
                     if (e) {
@@ -105,7 +111,7 @@ app.post('/data',
                         res.reply.success = true;
                         res.reply.mess = 'list sent';
                         res.reply.data = files
-                        res.status(200).json(res.reply);
+                            res.status(200).json(res.reply);
                     }
                 });
             } else {

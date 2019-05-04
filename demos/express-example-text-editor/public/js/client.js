@@ -52,9 +52,16 @@ var menuItems = [
                         data: get('text_edit').value
                     }, function (err, res) {
                         if (err) {
-                            get('text_edit').value = err;
+                            //get('text_edit').value = err;
                         } else {
-                            get('text_edit').value = res.data;
+                            //get('text_edit').value = res.data;
+							var html = '';
+							res.data.forEach(function(fn){
+								
+								html += '<span>'+fn+'<\/span><br>';
+								
+							});
+							get('filelist').innerHTML = html;
                         }
                     });
                 }
