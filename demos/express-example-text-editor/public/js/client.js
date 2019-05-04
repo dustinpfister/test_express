@@ -5,5 +5,10 @@ get('text_open').addEventListener('click', function (e) {
     Menu.Open({
         fn: get('text_fn').value
     });
+});
 
+get('text_save').addEventListener('click', function (e) {
+    Menu.Save({
+        fn: get('text_fn').value
+    });
 });

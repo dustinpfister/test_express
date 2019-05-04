@@ -17,6 +17,7 @@ var Menu = (function () {
         // if null for dir or fn the default will
         // be whatever is set server side
         opt = opt || {};
+        get('text_mess').innerHTML = '';
         get({
             payload: {
                 action: 'open',
@@ -30,6 +31,27 @@ var Menu = (function () {
             },
             onError: api.error
         });
+    };
+
+    api.Save = function (opt) {
+
+        opt = opt || {};
+        get('text_mess').innerHTML = '';
+        get({
+            payload: {
+                action: 'save',
+                dir: opt.dir || null,
+                fn: opt.fn || null,
+                data: get('text_edit').value
+            },
+            onDone: function (text, resObj) {
+                get('text_edit').value = text;
+                //console.log(resObj);
+                //get('text_fn').value = resObj.fn;
+            },
+            onError: api.error
+        });
+
     };
 
     return api;

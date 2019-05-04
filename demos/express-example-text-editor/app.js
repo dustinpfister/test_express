@@ -78,6 +78,12 @@ app.post('/data',
         // if action : 'save'
         (req, res, next) => {
             if (req.body.action === 'save') {
+
+                // set fn if given
+                if (req.body.fn) {
+                    app.set('fn', req.body.fn);
+                }
+
                 // if we have data
                 if (req.body.data) {
                     // try to save the data
