@@ -8,9 +8,10 @@ app.get('/', (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-
-    res.send(err.message); // 'My Custom Error'
-
+    let html = '<h1>Custom Error Handler<\/h1>' +
+        '<p>ERROR MESSAGE: ' + err.message + '<\/p>' +
+        '<p>STATUS CODE: ' + res.statusCode + '<\/p>';
+    res.send(html);
 });
 
 app.listen(8080);
