@@ -30,7 +30,7 @@ var Menu = (function () {
             },
             onError: api.error
         });
-    }
+    };
 
     return api;
 
