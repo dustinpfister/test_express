@@ -1,7 +1,7 @@
 let express = require('express'),
 app = express();
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
 
     throw new Error('My Custom Error');
 
