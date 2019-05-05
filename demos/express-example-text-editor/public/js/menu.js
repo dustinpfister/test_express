@@ -73,6 +73,13 @@ var Menu = (function () {
 
     };
 
+    var emptyList = function () {
+        var list = get('list');
+        while (list.firstChild) {
+            list.removeChild(list.firstChild);
+        }
+    };
+
     api.List = function (opt) {
 
         opt = opt || {};
@@ -82,8 +89,14 @@ var Menu = (function () {
                 action: 'list'
             },
             onDone: function (files, resObj) {
-                //get('text_edit').value = text;
-                //mess(files);
+
+                emptyList();
+
+                var html = '<br>';
+                files.forEach(function (fn) {
+                    html += '<span>' + fn + '<\/span><br>';
+                })
+                //get('list').innerHTML = html;
             },
             onError: api.error
         });

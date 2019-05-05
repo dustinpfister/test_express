@@ -1,6 +1,8 @@
 // open the current file
 Menu.Open();
 
+Menu.List();
+
 get('text_open').addEventListener('click', function (e) {
     Menu.Open({
         fn: get('text_fn').value
