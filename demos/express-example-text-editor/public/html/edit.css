@@ -4,7 +4,7 @@
 	margin:0px;
 }
 
-body{
+body,textarea,input{
 	background:black;
 	
 }

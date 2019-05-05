@@ -92,9 +92,21 @@ var Menu = (function () {
 
                 emptyList();
 
-                var html = '<br>';
+                //var html = '<br>';
+                var list = get('list');
                 files.forEach(function (fn) {
-                    html += '<span>' + fn + '<\/span><br>';
+                    //html += '<span>' + fn + '<\/span><br>';
+                    var item = document.createElement('p');
+                    item.innerText = fn;
+                    item.addEventListener('click', function (e) {
+
+                        api.Open({
+                            fn: e.target.innerText
+                        })
+
+                    })
+                    list.appendChild(item);
+
                 })
                 //get('list').innerHTML = html;
             },
