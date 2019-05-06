@@ -56,6 +56,7 @@ app.post('/data',
                 // set fn if given
                 if (req.body.fn) {
                     app.set('fn', req.body.fn);
+                    res.reply.fn = app.get('fn');
                 }
 
                 // try to open the current filename at the current dir

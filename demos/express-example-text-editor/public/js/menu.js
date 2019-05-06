@@ -2,7 +2,7 @@
 // back end system for the editor
 var Menu = (function () {
 
-    // set + clear messages
+    // set / clear messages
     var mess = (function () {
         var el_mess = get('text_mess'),
         el_eMess = get('text_emess');
@@ -19,6 +19,13 @@ var Menu = (function () {
         return func;
     }
         ());
+
+    // set the dir and fn input elements values to
+    // what is in the given reply object
+    var setInputs = function (reply) {
+        get('text_dir').value = reply.dir;
+        get('text_fn').value = reply.fn;
+    };
 
     // public api
     var api = {};
@@ -46,8 +53,9 @@ var Menu = (function () {
             },
             onDone: function (text, resObj) {
                 get('text_edit').value = text;
-                get('text_fn').value = resObj.fn;
+                //get('text_fn').value = resObj.fn;
                 mess(resObj.mess);
+                setInputs(resObj);
             },
             onError: api.error
         });
