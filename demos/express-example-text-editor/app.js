@@ -36,15 +36,12 @@ app.post('/data',
             if (!req.body) {
                 res.status(400).json(res.reply);
             } else {
-
                 // sync server side fn and dir settings to any settings given by client
                 app.set('fn', req.body.fn || app.get('fn'));
                 app.set('dir', req.body.dir || app.get('dir'));
-				res.reply.fn = app.get('fn');
-				res.reply.dir =  app.get('dir');
-				
-				console.log(res.reply);
-
+                res.reply.fn = app.get('fn');
+                res.reply.dir = app.get('dir');
+                // next middleware
                 next();
             }
         },
@@ -63,13 +60,6 @@ app.post('/data',
         // if action : 'open'
         (req, res, next) => {
             if (req.body.action === 'open') {
-
-                // set fn if given
-                //if (req.body.fn) {
-                //    app.set('fn', req.body.fn);
-                //    res.reply.fn = app.get('fn');
-                //}
-
                 // try to open the current filename at the current dir
                 fs.readFile(path.join(app.get('dir'), app.get('fn')), app.get('encode'), (e, data) => {
                     if (e) {
@@ -90,12 +80,6 @@ app.post('/data',
         // if action : 'save'
         (req, res, next) => {
             if (req.body.action === 'save') {
-
-                // set fn if given
-                //if (req.body.fn) {
-                //    app.set('fn', req.body.fn);
-                //}
-
                 // if we have data
                 if (req.body.data) {
                     // try to save the data
