@@ -26,7 +26,9 @@ app.post('/data',
             // Create reply object
             res.reply = {
                 success: false,
-                mess: 'no body object populated.'
+                mess: 'no body object populated.',
+                fn: app.get('fn'),
+                dir: app.get('dir')
             };
             // check for body or next
             if (!req.body) {
@@ -65,8 +67,8 @@ app.post('/data',
                         res.reply.success = true;
                         res.reply.mess = 'opened and sent file data';
                         res.reply.data = data;
-                        res.reply.fn = app.get('fn');
-                        res.reply.dir = app.get('dir');
+                        //res.reply.fn = app.get('fn');
+                        //res.reply.dir = app.get('dir');
                         res.status(200).json(res.reply);
                     }
                 });
@@ -118,8 +120,8 @@ app.post('/data',
                     } else {
                         res.reply.success = true;
                         res.reply.mess = 'list sent';
-                        res.reply.data = files
-                            res.status(200).json(res.reply);
+                        res.reply.data = files;
+                        res.status(200).json(res.reply);
                     }
                 });
             } else {
