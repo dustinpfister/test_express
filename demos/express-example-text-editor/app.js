@@ -23,17 +23,28 @@ app.post('/data',
 
         // create reply object, and check for body
         (req, res, next) => {
+
             // Create reply object
             res.reply = {
                 success: false,
                 mess: 'no body object populated.',
-                fn: app.get('fn'),
-                dir: app.get('dir')
+                //fn: app.get('fn'),
+                //dir: app.get('dir')
             };
+
             // check for body or next
             if (!req.body) {
                 res.status(400).json(res.reply);
             } else {
+
+                // sync server side fn and dir settings to any settings given by client
+                app.set('fn', req.body.fn || app.get('fn'));
+                app.set('dir', req.body.dir || app.get('dir'));
+				res.reply.fn = app.get('fn');
+				res.reply.dir =  app.get('dir');
+				
+				console.log(res.reply);
+
                 next();
             }
         },
@@ -54,10 +65,10 @@ app.post('/data',
             if (req.body.action === 'open') {
 
                 // set fn if given
-                if (req.body.fn) {
-                    app.set('fn', req.body.fn);
-                    res.reply.fn = app.get('fn');
-                }
+                //if (req.body.fn) {
+                //    app.set('fn', req.body.fn);
+                //    res.reply.fn = app.get('fn');
+                //}
 
                 // try to open the current filename at the current dir
                 fs.readFile(path.join(app.get('dir'), app.get('fn')), app.get('encode'), (e, data) => {
@@ -68,8 +79,6 @@ app.post('/data',
                         res.reply.success = true;
                         res.reply.mess = 'opened and sent file data';
                         res.reply.data = data;
-                        //res.reply.fn = app.get('fn');
-                        //res.reply.dir = app.get('dir');
                         res.status(200).json(res.reply);
                     }
                 });
@@ -83,9 +92,9 @@ app.post('/data',
             if (req.body.action === 'save') {
 
                 // set fn if given
-                if (req.body.fn) {
-                    app.set('fn', req.body.fn);
-                }
+                //if (req.body.fn) {
+                //    app.set('fn', req.body.fn);
+                //}
 
                 // if we have data
                 if (req.body.data) {
