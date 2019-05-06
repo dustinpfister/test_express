@@ -94,7 +94,8 @@ var Menu = (function () {
         mess.clear();
         get({
             payload: {
-                action: 'list'
+                action: 'list',
+                dir: opt.dir || null,
             },
             onDone: function (files, resObj) {
 
@@ -107,16 +108,14 @@ var Menu = (function () {
                     var item = document.createElement('p');
                     item.innerText = fn;
                     item.addEventListener('click', function (e) {
-
+                        // open the file clicked
                         api.Open({
                             fn: e.target.innerText
                         })
-
                     })
                     list.appendChild(item);
 
-                })
-                //get('list').innerHTML = html;
+                });
             },
             onError: api.error
         });
