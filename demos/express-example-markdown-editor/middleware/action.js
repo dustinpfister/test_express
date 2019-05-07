@@ -8,7 +8,6 @@ router.use((req, res, next) => {
     try {
 
         let action = require(path.join(res.app.get('dir_mw'), './action_' + req.body.action + '.js'));
-
         action(req, res, next);
 
     } catch (e) {
