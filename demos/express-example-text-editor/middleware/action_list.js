@@ -4,6 +4,19 @@ fs = require('fs');
 // if action : 'list' - to list files in current dir
 module.exports = [(req, res, next) => {
         if (req.body.action === 'list') {
+
+            console.log('*********');
+            console.log(req.body);
+            console.log(res.app.get('dir'));
+            if (req.body.cd) {
+
+                console.log(req.body.cd);
+
+                res.app.set('dir', path.join(res.app.get('dir'), req.body.cd));
+                res.reply.dir = res.app.get('dir')
+
+            }
+
             fs.readdir(path.resolve(res.app.get('dir')), (e, files) => {
                 if (e) {
                     res.reply.mess = e.message;

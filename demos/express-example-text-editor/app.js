@@ -39,7 +39,7 @@ app.post('/data',
             } else {
                 // sync server side fn and dir settings to any settings given by client
                 app.set('fn', req.body.fn || app.get('fn'));
-                app.set('dir', req.body.dir || app.get('dir'));
+                app.set('dir', path.resolve(req.body.dir || app.get('dir')));
                 res.reply.fn = app.get('fn');
                 res.reply.dir = app.get('dir');
                 // next middleware

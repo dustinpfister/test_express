@@ -95,6 +95,7 @@ var Menu = (function () {
             payload: {
                 action: 'list',
                 dir: opt.dir || null,
+                cd: opt.cd || null
             },
             onDone: function (files, resObj) {
 
@@ -110,7 +111,7 @@ var Menu = (function () {
                         // open the file clicked
                         if (fStat.dir) {
                             Menu.List({
-                                dir: e.target.innerText
+                                cd: e.target.innerText
                             });
 
                         } else {
