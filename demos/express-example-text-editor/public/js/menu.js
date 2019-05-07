@@ -101,10 +101,8 @@ var Menu = (function () {
 
                 emptyList();
 
-                //var html = '<br>';
                 var list = get('list_files');
                 files.forEach(function (fn) {
-                    //html += '<span>' + fn + '<\/span><br>';
                     var item = document.createElement('p');
                     item.innerText = fn;
                     item.addEventListener('click', function (e) {
