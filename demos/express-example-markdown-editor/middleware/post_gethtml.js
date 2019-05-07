@@ -19,7 +19,11 @@ router.get('*', (req, res) => {
         } else {
             // used marked to send html of markdown
             res.set('Content-Type', 'text/html');
-            res.status(200).send(marked(md));
+
+            let html = '<head>  <link rel="stylesheet" type="text/css" href="edit.css"><\/head>'+
+			'<body>' + marked(md) + '<\/body>';
+
+            res.status(200).send(html);
         }
     });
 

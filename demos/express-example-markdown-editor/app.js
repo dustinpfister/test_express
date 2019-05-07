@@ -133,4 +133,4 @@ app.post('/data',
 
     ]);
 
-app.listen(app.get('port'), () => console.log('example text editor is up on port: ' + app.get('port')));
+app.listen(app.get('port'), () => console.log('example markdown editor is up on port: ' + app.get('port')));
