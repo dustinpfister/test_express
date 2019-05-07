@@ -22,46 +22,10 @@ app.use(require('body-parser').json());
 app.post('/data',
 
     [
-	
-	    require('./middleware/body_check.js'),
 
-	/*
-        // create reply object, and check for body
-        (req, res, next) => {
+        // check body
+        require('./middleware/body_check.js'),
 
-            // Create reply object
-            res.reply = {
-                success: false,
-                mess: 'no body object populated.',
-                //fn: app.get('fn'),
-                //dir: app.get('dir')
-            };
-
-            // check for body or next
-            if (!req.body) {
-                res.status(400).json(res.reply);
-            } else {
-                // sync server side fn and dir settings to any settings given by client
-                app.set('fn', req.body.fn || app.get('fn'));
-                app.set('dir', req.body.dir || app.get('dir'));
-                res.reply.fn = app.get('fn');
-                res.reply.dir = app.get('dir');
-                // next middleware
-                next();
-            }
-        },
-		*/
-
-        // if no action
-        (req, res, next) => {
-            // If no action Action, or next
-            if (!req.body.action) {
-                res.reply.mess = 'An action must be given';
-                res.status(400).json(res.reply);
-            } else {
-                next();
-            }
-        },
 
         // if action : 'open'
         (req, res, next) => {
