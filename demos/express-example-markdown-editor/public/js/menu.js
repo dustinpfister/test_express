@@ -38,8 +38,7 @@ var Menu = (function () {
         mess.eMess(eMess);
     }
 
-    // Open the file that is at the current
-    // dir and fn app settings
+    // Open a file
     api.Open = function (opt) {
         // if null for dir or fn the default will
         // be whatever is set server side
@@ -61,6 +60,7 @@ var Menu = (function () {
         });
     };
 
+    // save the current file
     api.Save = function (opt) {
         opt = opt || {};
         mess.clear();
@@ -81,15 +81,14 @@ var Menu = (function () {
 
     };
 
+    // List files in the current dir
     var emptyList = function () {
         var list = get('list_files').contentWindow.document.body;
         while (list.firstChild) {
             list.removeChild(list.firstChild);
         }
     };
-
     api.List = function (opt) {
-
         opt = opt || {};
         mess.clear();
         get({
@@ -98,13 +97,9 @@ var Menu = (function () {
                 dir: opt.dir || null,
             },
             onDone: function (files, resObj) {
-
                 emptyList();
-
-                //var html = '<br>';
                 var list = get('list_files');
                 files.forEach(function (fn) {
-                    //html += '<span>' + fn + '<\/span><br>';
                     var item = document.createElement('p');
                     item.innerText = fn;
                     item.addEventListener('click', function (e) {
@@ -114,7 +109,6 @@ var Menu = (function () {
                         })
                     })
                     list.contentWindow.document.body.appendChild(item);
-
                 });
             },
             onError: api.error
