@@ -1,4 +1,12 @@
 * {
-	padding:0px;
+	padding:5px;
 	margin:0px;
+}
+div {
+	position:relative;
+	float:left;
+}
+#list_files{
+	width:160px;
+	height:400px;
 }
