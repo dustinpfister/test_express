@@ -1,0 +1,57 @@
+* {
+	color: white;
+	padding:0px;
+	margin:0px;
+}
+
+body,textarea,input{
+	background:black;
+	
+}
+
+.text_emess{
+	color:red;
+}
+
+.text_mess{
+	color:green;
+}
+
+.menu_text{
+	background: white;
+	color:black;
+	
+}
+
+.list{
+	position:absolute;
+	background:red;
+}
+
+.editor{
+	display:absolute;
+	left:20%;
+	width:75%;
+}
+
+.menu{
+	position:relative;
+}
+
+.menu_item{
+	position:relative;
+	display: inline-block;
+	width:50px;
+}
+
+.menu_options{
+	position: relative;
+	top:0px;
+	left:0px;
+	z-index: 1;
+}
+
+.editor{
+	position:relative;
+	padding: 10px
+}
