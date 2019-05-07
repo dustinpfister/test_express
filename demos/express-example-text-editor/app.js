@@ -58,27 +58,8 @@ app.post('/data',
             }
         },
 
-        // if action : 'open'
-        (req, res, next) => {
-            if (req.body.action === 'open') {
-                // try to open the current filename at the current dir
-                fs.readFile(path.join(app.get('dir'), app.get('fn')), app.get('encode'), (e, data) => {
-                    if (e) {
-                        res.reply.mess = e.message;
-                        res.status(400).json(res.reply);
-                    } else {
-                        res.reply.success = true;
-                        res.reply.mess = 'opened and sent file data';
-                        res.reply.data = data;
-                        res.status(200).json(res.reply);
-                    }
-                });
-            } else {
-                next();
-            }
-        },
-
         // actions
+        require(path.join(app.get('dir_mw'), 'action_open.js')),
         require(path.join(app.get('dir_mw'), 'action_save.js')),
         require(path.join(app.get('dir_mw'), 'action_list.js')),
 
