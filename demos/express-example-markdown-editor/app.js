@@ -13,6 +13,8 @@ app.set('encode', 'utf8');
 app.use('/js', express.static('public/js'));
 app.use('/', express.static('public/html'));
 
+app.use('/html', require('./middleware/post_gethtml.js'));
+
 // body parser
 app.use(require('body-parser').json());
 
