@@ -4,35 +4,33 @@
 }
 
 div {
-	/*display:inline-block;*/
 	position:relative;
 	float:left;
 }
 
 .wrap_main{
-	background:grey;
-	width:100%;
+	width:98%;
+	padding:1%;
 }
 .list{
 	width:20%;
-	background:red;
+}
+#list_files{
+	width:100%;
 }
 .editor{
-	background:green;
 	width:40%;
+	padding:1%;
 }
 #text_edit{
 	width:100%;
-	min-height:240px;
+	min-height:400px;
 }
 .viewer{
-	width:40%;
-	background:blue;
+	width:38%;
 	
 }
 #viewer_md{
-	width:95%;
-	display:block;
-	margin:auto;
+	width:100%;
 	height:400px;
 }
