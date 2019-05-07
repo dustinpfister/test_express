@@ -14,7 +14,7 @@ app.use('/js', express.static('public/js'));
 app.use('/', express.static('public/html'));
 
 // html of current md file
-app.use('/html', require('./middleware/post_gethtml.js'));
+app.use('/html', require('./middleware/md_html.js'));
 
 // body parser
 app.use(require('body-parser').json());
