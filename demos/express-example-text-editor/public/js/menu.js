@@ -89,7 +89,6 @@ var Menu = (function () {
     };
 
     api.List = function (opt) {
-
         opt = opt || {};
         mess.clear();
         get({
@@ -101,10 +100,12 @@ var Menu = (function () {
 
                 emptyList();
 
+                console.log('files:');
+
                 var list = get('list_files');
-                files.forEach(function (fn) {
-                    var item = document.createElement('p');
-                    item.innerText = fn;
+                files.forEach(function (fStat) {
+                    var item = document.createElement('div');
+                    item.innerHTML = '<span style=\"'+(fStat.dir ? 'color:red;' : 'color:green;') + '\">' + fStat.fn + '<\/span>';
                     item.addEventListener('click', function (e) {
                         // open the file clicked
                         api.Open({

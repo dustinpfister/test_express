@@ -11,6 +11,9 @@ div {
 	width:20%;
 	background:grey;
 }
+.list_dirlink{
+	color:red;
+}
 #list_files{
 	width:100%;
 	height:400px;
