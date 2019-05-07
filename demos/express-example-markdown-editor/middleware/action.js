@@ -1,7 +1,5 @@
 let express = require('express'),
 path = require('path'),
-fs = require('fs'),
-marked = require('marked'),
 
 router = module.exports = express.Router();
 
