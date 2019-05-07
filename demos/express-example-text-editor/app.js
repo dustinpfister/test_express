@@ -3,10 +3,11 @@ path = require('path'),
 fs = require('fs'),
 app = express();
 
-app.set('port', process.argv[2] || process.env.PORT || 8080);
-
 app.set('dir', process.cwd());
 app.set('fn', 'newfile.txt');
+
+app.set('port', process.argv[2] || process.env.PORT || 8080);
+app.set('dir_mw', path.resolve('./middleware'));
 app.set('encode', 'utf8');
 
 // hosting static assets for the client system
@@ -104,24 +105,28 @@ app.post('/data',
             }
         },
 
+        require(path.join(app.get('dir_mw'), 'action_list.js')),
+
+        /*
         // if action : 'list' - to list files in current dir
         (req, res, next) => {
-            if (req.body.action === 'list') {
-                fs.readdir(path.resolve(app.get('dir')), (e, files) => {
-                    if (e) {
-                        res.reply.mess = e.message;
-                        res.status(400).json(res.reply);
-                    } else {
-                        res.reply.success = true;
-                        res.reply.mess = 'list sent';
-                        res.reply.data = files;
-                        res.status(200).json(res.reply);
-                    }
-                });
-            } else {
-                next();
-            }
+        if (req.body.action === 'list') {
+        fs.readdir(path.resolve(app.get('dir')), (e, files) => {
+        if (e) {
+        res.reply.mess = e.message;
+        res.status(400).json(res.reply);
+        } else {
+        res.reply.success = true;
+        res.reply.mess = 'list sent';
+        res.reply.data = files;
+        res.status(200).json(res.reply);
+        }
+        });
+        } else {
+        next();
+        }
         },
+         */
 
         // unknown action
         (req, res, next) => {
