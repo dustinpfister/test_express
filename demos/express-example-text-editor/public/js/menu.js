@@ -105,12 +105,19 @@ var Menu = (function () {
                 var list = get('list_files');
                 files.forEach(function (fStat) {
                     var item = document.createElement('div');
-                    item.innerHTML = '<span style=\"'+(fStat.dir ? 'color:red;' : 'color:green;') + '\">' + fStat.fn + '<\/span>';
+                    item.innerHTML = '<span style=\"' + (fStat.dir ? 'color:red;' : 'color:green;') + '\">' + fStat.fn + '<\/span>';
                     item.addEventListener('click', function (e) {
                         // open the file clicked
-                        api.Open({
-                            fn: e.target.innerText
-                        })
+                        if (fStat.dir) {
+                            Menu.List({
+                                dir: e.target.innerText
+                            });
+
+                        } else {
+                            api.Open({
+                                fn: e.target.innerText
+                            });
+                        }
                     })
                     list.contentWindow.document.body.appendChild(item);
 
