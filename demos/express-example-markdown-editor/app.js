@@ -22,7 +22,10 @@ app.use(require('body-parser').json());
 app.post('/data',
 
     [
+	
+	    require('./middleware/body_check.js'),
 
+	/*
         // create reply object, and check for body
         (req, res, next) => {
 
@@ -47,6 +50,7 @@ app.post('/data',
                 next();
             }
         },
+		*/
 
         // if no action
         (req, res, next) => {
