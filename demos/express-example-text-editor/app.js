@@ -78,55 +78,9 @@ app.post('/data',
             }
         },
 
-        // if action : 'save'
-        (req, res, next) => {
-            if (req.body.action === 'save') {
-                // if we have data
-                if (req.body.data) {
-                    // try to save the data
-                    fs.writeFile(path.join(app.get('dir'), app.get('fn')), req.body.data, (e) => {
-                        if (e) {
-                            res.reply.mess = e.message;
-                            res.status(400).json(res.reply);
-                        } else {
-                            res.reply.success = true;
-                            res.reply.mess = 'save file success';
-                            res.reply.data = req.body.data;
-                            res.status(200).json(res.reply);
-                        }
-                    })
-                } else {
-                    // else we do not have data to save
-                    res.reply.mess = 'must have data to save';
-                    res.status(400).json(res.reply);
-                }
-            } else {
-                next();
-            }
-        },
-
+        // actions
+        require(path.join(app.get('dir_mw'), 'action_save.js')),
         require(path.join(app.get('dir_mw'), 'action_list.js')),
-
-        /*
-        // if action : 'list' - to list files in current dir
-        (req, res, next) => {
-        if (req.body.action === 'list') {
-        fs.readdir(path.resolve(app.get('dir')), (e, files) => {
-        if (e) {
-        res.reply.mess = e.message;
-        res.status(400).json(res.reply);
-        } else {
-        res.reply.success = true;
-        res.reply.mess = 'list sent';
-        res.reply.data = files;
-        res.status(200).json(res.reply);
-        }
-        });
-        } else {
-        next();
-        }
-        },
-         */
 
         // unknown action
         (req, res, next) => {
