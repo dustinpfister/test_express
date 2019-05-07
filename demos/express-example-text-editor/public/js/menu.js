@@ -82,7 +82,7 @@ var Menu = (function () {
     };
 
     var emptyList = function () {
-        var list = get('list');
+        var list = get('list_files').contentWindow.document.body;
         while (list.firstChild) {
             list.removeChild(list.firstChild);
         }
@@ -102,7 +102,7 @@ var Menu = (function () {
                 emptyList();
 
                 //var html = '<br>';
-                var list = get('list');
+                var list = get('list_files');
                 files.forEach(function (fn) {
                     //html += '<span>' + fn + '<\/span><br>';
                     var item = document.createElement('p');
@@ -113,7 +113,7 @@ var Menu = (function () {
                             fn: e.target.innerText
                         })
                     })
-                    list.appendChild(item);
+                    list.contentWindow.document.body.appendChild(item);
 
                 });
             },
