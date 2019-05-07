@@ -9,7 +9,7 @@ var get = function (sOpt) {
 
         // else an OBJECT is assumed and used to make http requests
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/data', true);
+        xhr.open('POST', '/action', true);
 
         sOpt = sOpt || {};
         sOpt.payload = sOpt.payload || {};
