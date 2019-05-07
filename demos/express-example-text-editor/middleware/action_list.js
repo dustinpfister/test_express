@@ -27,6 +27,13 @@ module.exports = [(req, res, next) => {
                     stepStat = () => {
                         i += 1;
                         if (i === len) {
+
+                            // add back one
+                            files.unshift({
+                                fn: '..',
+                                dir: true
+                            });
+
                             res.reply.success = true;
                             res.reply.mess = 'list sent';
                             res.reply.data = files;
