@@ -1,6 +1,5 @@
 let express = require('express'),
 path = require('path'),
-fs = require('fs'),
 app = express();
 
 app.set('dir', process.cwd());
