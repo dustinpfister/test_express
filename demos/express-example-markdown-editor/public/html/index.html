@@ -4,8 +4,9 @@
   <link rel="stylesheet" type="text/css" href="edit.css">
 </head>
 <body>
+<div class="wrap_main">
 <div class="list">
-  <br><br><iframe id="list_files" class="list_files" width="160" height="240"></iframe>
+  <br><br><iframe id="list_files" class="list_files"></iframe>
 </div>
  <div class="editor">
   <br><br>dir : <input id="text_dir" type="text">
@@ -14,15 +15,15 @@
     <input id="text_open" type="button" value="open">
     <input id="text_save" type="button" value="save">
   
-  <br><br><textarea id="text_edit" rows="16" cols="64"></textarea>
+  <br><br><textarea id="text_edit"></textarea>
   <br>
     <span id="text_emess" class="text_emess"></span>
     <span id="text_mess" class="text_mess"></span>
 </div>
 <div class="viewer">
-  <iframe id="md_view" src="/html" width="320" height="240"></iframe>
+  <iframe id="viewer_md" src="/html"></iframe>
 </div>
-
+</div>
 <script src="/js/get.js"></script>
 <script src="/js/menu.js"></script>
 <script src="/js/client.js"></script>

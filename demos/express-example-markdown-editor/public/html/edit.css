@@ -3,3 +3,36 @@
 	margin:0px;
 }
 
+div {
+	/*display:inline-block;*/
+	position:relative;
+	float:left;
+}
+
+.wrap_main{
+	background:grey;
+	width:100%;
+}
+.list{
+	width:20%;
+	background:red;
+}
+.editor{
+	background:green;
+	width:40%;
+}
+#text_edit{
+	width:100%;
+	min-height:240px;
+}
+.viewer{
+	width:40%;
+	background:blue;
+	
+}
+#viewer_md{
+	width:95%;
+	display:block;
+	margin:auto;
+	height:400px;
+}

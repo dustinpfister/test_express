@@ -53,7 +53,7 @@ var Menu = (function () {
             },
             onDone: function (text, resObj) {
                 get('text_edit').value = text;
-                get('md_view').contentWindow.location.reload();
+                get('viewer_md').contentWindow.location.reload();
                 mess(resObj.mess);
                 setInputs(resObj);
             },
@@ -73,7 +73,7 @@ var Menu = (function () {
             },
             onDone: function (text, resObj) {
                 get('text_edit').value = text;
-                get('md_view').contentWindow.location.reload();
+                get('viewer_md').contentWindow.location.reload();
                 mess(resObj.mess);
             },
             onError: api.error
