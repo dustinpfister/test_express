@@ -26,27 +26,33 @@ app.post('/data',
         // check body
         require('./middleware/body_check.js'),
 
+        require('./middleware/action.js'),
 
+		/*
+        
         // if action : 'open'
         (req, res, next) => {
-            if (req.body.action === 'open') {
-                // try to open the current filename at the current dir
-                fs.readFile(path.join(app.get('dir'), app.get('fn')), app.get('encode'), (e, data) => {
-                    if (e) {
-                        res.reply.mess = e.message;
-                        res.status(400).json(res.reply);
-                    } else {
-                        res.reply.success = true;
-                        res.reply.mess = 'opened and sent file data';
-                        res.reply.data = data;
-                        res.status(200).json(res.reply);
-                    }
-                });
-            } else {
-                next();
-            }
+        if (req.body.action === 'open') {
+        // try to open the current filename at the current dir
+        fs.readFile(path.join(app.get('dir'), app.get('fn')), app.get('encode'), (e, data) => {
+        if (e) {
+        res.reply.mess = e.message;
+        res.status(400).json(res.reply);
+        } else {
+        res.reply.success = true;
+        res.reply.mess = 'opened and sent file data';
+        res.reply.data = data;
+        res.status(200).json(res.reply);
+        }
+        });
+        } else {
+        next();
+        }
         },
+		*/
+         
 
+		 /*
         // if action : 'save'
         (req, res, next) => {
             if (req.body.action === 'save') {
@@ -73,7 +79,9 @@ app.post('/data',
                 next();
             }
         },
+		*/
 
+		/*
         // if action : 'list' - to list files in current dir
         (req, res, next) => {
             if (req.body.action === 'list') {
@@ -92,6 +100,7 @@ app.post('/data',
                 next();
             }
         },
+		*/
 
         // unknown action
         (req, res, next) => {
