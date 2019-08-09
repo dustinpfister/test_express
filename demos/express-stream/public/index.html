@@ -1,0 +1,16 @@
+<p>okay</p>
+<script>
+var xml = new XMLHttpRequest();
+xml.open('POST','/');
+xml.onreadystatechange = function(){
+console.log(this.readyState);
+};
+xml.onprogress = function(){
+	
+	console.log('% :')
+	
+};
+xml.send({
+   bar:'foo'
+});
+</script>
