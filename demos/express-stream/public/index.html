@@ -1,13 +1,15 @@
-<p>okay</p>
+<h1>Express Stream Example</h1>
+<div id="out"></div>
 <script>
 var xml = new XMLHttpRequest();
 xml.open('POST','/');
 xml.onreadystatechange = function(){
-console.log(this.readyState);
+//console.log(this.response);
+document.getElementById('out').innerText = this.response;
 };
-xml.onprogress = function(){
+xml.onprogress = function(a){
 	
-	console.log('% :')
+	console.log(a);
 	
 };
 xml.send({
