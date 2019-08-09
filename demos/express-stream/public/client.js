@@ -3,7 +3,9 @@ var xml = new XMLHttpRequest();
 xml.open('GET', '/file');
 // on ready state
 xml.onreadystatechange = function () {
-    document.getElementById('out').innerText = this.response;
+    if(this.readyState === 4 && this.status === 200){
+        document.getElementById('out').innerText = this.response;
+    }
 };
 // update process bar
 xml.onprogress = function (a) {

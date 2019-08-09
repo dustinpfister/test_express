@@ -7,7 +7,7 @@ port = process.argv[3] || 8080,
 file = process.argv[2] || 'file.txt',
 // options for the readStream
 readStreamOptions = {
-    highWaterMark: 512
+    highWaterMark: 16
 };
 // serving an index.html, and a client.js file
 // in a public folder with express static
