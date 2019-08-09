@@ -9,7 +9,7 @@ document.getElementById('out').innerText = this.response;
 };
 xml.onprogress = function(a){
 	
-	console.log(a);
+	console.log(a.loaded / a.total);
 	
 };
 xml.send({
