@@ -1,9 +1,19 @@
 let express = require('express'),
 fs = require('fs'),
 app = express(),
-file = process.argv[2] || 'file.txt',
-port = process.argv[3] || 8080;
 
+// The port to listen on
+port = process.argv[3] || 8080,
+
+// the file to send
+file = process.argv[2] || 'file.txt',
+
+// options for the readStream
+readStreamOptions = {
+    highWaterMark: 256
+};
+
+// serving an index.js file
 app.use(express.static('./public'));
 
 app.post('/', (req, res) => {
@@ -15,9 +25,7 @@ app.post('/', (req, res) => {
             'Content-Type': 'text/plain'
         });
 
-        let reader = fs.createReadStream(file, {
-                highWaterMark: 256
-            });
+        let reader = fs.createReadStream(file, readStreamOptions);
 
         reader.on('close', () => {
             res.end();

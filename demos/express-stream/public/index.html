@@ -1,18 +1,6 @@
 <h1>Express Stream Example</h1>
+<div style="width:320px;height:20px;background:#afafaf;">
+    <div id="process-bar" style="width:0px;height:20px;background:#00af00;"></div>
+</div>
 <div id="out"></div>
-<script>
-var xml = new XMLHttpRequest();
-xml.open('POST','/');
-xml.onreadystatechange = function(){
-//console.log(this.response);
-document.getElementById('out').innerText = this.response;
-};
-xml.onprogress = function(a){
-	
-	console.log(a.loaded / a.total);
-	
-};
-xml.send({
-   bar:'foo'
-});
-</script>
+<script src="client.js"></script>
