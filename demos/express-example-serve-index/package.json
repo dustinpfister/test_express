@@ -1,0 +1,15 @@
+{
+  "name": "express-example-serve-index",
+  "version": "0.0.0",
+  "description": "serve-index example",
+  "main": "static.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dustin Pfister",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "serve-index": "^1.9.1"
+  }
+}
