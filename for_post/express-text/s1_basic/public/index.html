@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Express text Example</title>
+  </head>
+<body>
+<h1>Express Text Example</h1>
+<textarea id="out"></textarea>
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open('POST', '/', true);
+xhr.onreadystatechange = function () {
+    if (this.readyState === 4) {
+        document.getElementById('out').innerHTML = this.response;
+    }
+};
+xhr.setRequestHeader('Content-type', 'text/plain');
+xhr.send('Hello World');
+</script>
+</body>
+</html>
