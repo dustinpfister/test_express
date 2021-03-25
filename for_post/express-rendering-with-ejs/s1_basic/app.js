@@ -7,7 +7,7 @@ app.set('port', process.env.PORT || process.argv[2] || 8080 );
  
 // view engine setup
 app.set('view engine', 'ejs'); // the render engine
-app.set('views', path.join( __dirname, 'views') ); // the views folder for the *.ejs files
+app.set('views', path.resolve( __dirname, 'views') ); // the views folder for the *.ejs files
 
 // a single path for /
 app.get('/', function (req, res) {

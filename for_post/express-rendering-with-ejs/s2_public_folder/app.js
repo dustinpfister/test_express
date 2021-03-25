@@ -1,31 +1,24 @@
 let express = require('express'),
 path = require('path'),
-app = express(),
-
+app = express();
+ 
 // getting port this way
-port = process.env.PORT || process.argv[2] || 8080;
-
+app.set('port', process.env.PORT || process.argv[2] || 8080 );
+app.set('public_html', path.resolve( __dirname, 'public') ));
+ 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs'); // the render engine
+app.set('views', path.resolve( __dirname, 'views') ); // the views folder for the *.ejs files
 
-// set up a static path
-app.use('/static', express.static('public'));
+// a single path for /
+app.get('/', [
+    express.static( api.get('public_html') ),
+    function (req, res) {
+        res.render('index', {}); 
+    }
+);
 
-app.get('/', function (req, res) {
-
-    res.render('index',{});
-
-});
-
-app.get('*', function(req,res){
-
-    res.render('404',{});
-
-});
-
-app.listen(port, function () {
-
-    console.log('app is up on port: ' + port);
-
+// listen on the port app setting
+app.listen(app.get('port'), function () {
+    console.log('app is up on port: ' + app.get('port'));
 });
