@@ -28,21 +28,22 @@ app.use(session({
 let pointers = {};
 
 // create a new pointer
-let createPointer = function(sessionID){
+let createPointer = function(sessionID, name){
     return pointers[sessionID] = {
         x: 10 + Math.random() * 300,
         y: 10 + Math.random() * 220,
+        name: name,
         made: new Date()
     };
 };
 
 // get a pointer for the given sessionID,
 // or create and return a new one if not there
-let getPointer = function(sessionID){
+let getPointer = function(sessionID, name){
    if(pointers[sessionID]){
       return pointers[sessionID];
    }
-   return createPointer(sessionID);
+   return createPointer(sessionID, name);
 };
 
 // purge old objects
@@ -77,7 +78,7 @@ app.post('/', [
         // purge any old objects
         purgeOld();
         // get the pointer for the current session
-        req.pointer = getPointer(req.sessionID);
+        req.pointer = getPointer(req.sessionID, req.body.name);
         next();
     },
     // if info action

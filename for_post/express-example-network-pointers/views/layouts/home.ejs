@@ -13,25 +13,29 @@ var canvasObj = utils.createCanvas({
 canvas = canvasObj.canvas,
 ctx = canvasObj.ctx;
 
+var infoObj = {
+    action: 'info',
+    name: 'user_' + (1 + Math.floor(Math.random() * 9998))
+};
+
 var update = function(res, obj){
    var obj = JSON.parse(res);
    ctx.fillStyle = 'black';
    ctx.fillRect(0,0, canvas.width, canvas.height);
    ctx.strokeStyle = 'white';
-   ctx.fillStyle = 'blue';
    Object.keys(obj.pointers).forEach(function(key){
        var pt = obj.pointers[key];
+       ctx.fillStyle = 'blue';
        ctx.beginPath();
        ctx.arc(pt.x, pt.y, 10, 0, Math.PI * 2);
        ctx.stroke();
        ctx.fill();
+       ctx.fillStyle = 'white';
+       ctx.textAlign = 'center';
+       ctx.fillText(pt.name, pt.x, pt.y);
    });
    //document.getElementById('out').value += obj.sessionID + ' : ' + obj.pointer.x + '\n\n';
    //document.getElementById('out').value += Object.keys(obj.pointers).length + '\n\n';
-};
-
-var infoObj = {
-    action: 'info'
 };
 
 // info loop
