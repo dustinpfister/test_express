@@ -1,6 +1,6 @@
 <h1>Home</h1>
 
-<!-- <textarea id="out" rows="10" cols="60"></textarea> -->
+<input id="set_name" type="text" ><br><br>
 <div id="canvas-app"></div>
 
 
@@ -34,8 +34,6 @@ var update = function(res, obj){
        ctx.textAlign = 'center';
        ctx.fillText(pt.name, pt.x, pt.y);
    });
-   //document.getElementById('out').value += obj.sessionID + ' : ' + obj.pointer.x + '\n\n';
-   //document.getElementById('out').value += Object.keys(obj.pointers).length + '\n\n';
 };
 
 // info loop
@@ -44,5 +42,8 @@ var loop = function(){
     setTimeout(loop, 3000);
 };
 loop();
+
+var setName = document.getElementById('set_name');
+setName.value = infoObj.name;
 
 </script>
