@@ -53,8 +53,6 @@ let purgeOld = () => {
     });
 };
 
-
-
 // one main middleware for / using express.static and res.render
 app.use('/', express.static( app.get('public_html') ));
 
@@ -70,9 +68,11 @@ app.get('/', (req, res, next) => {
 app.use('/', express.json());
 app.post('/', (req, res) => {
 
-   var pointer = getPointer(req.sessionID);
-
+   // purge any old objects
    purgeOld();
+
+   // get the pointer for the current session
+   var pointer = getPointer(req.sessionID);
 
    res.json({
        pointer: pointer,
