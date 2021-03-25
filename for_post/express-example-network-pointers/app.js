@@ -16,27 +16,28 @@ app.set('trust proxy', 1) // trust first proxy
 app.use(session({
     name: '_network_pointer_id',
     secret: '1234',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {maxAge: 300 * 1000 }
+    resave: true,
+    saveUninitialized: true,
+    cookie: {maxAge: 30 * 1000 }
 }))
 
 // one main middleware for / using express.static and res.render
-app.use('/', [
- 
-    // use express.static first to look for a static resource
-    express.static( app.get('public_html') ),
- 
-    // if not found render main index, but only for / else next
-    function (req, res, next) {
-        console.log(req.sessionID);
-        if(req.url === '/'){
-            res.render('index', {layout: 'home' });
-        }else{
-            next();
-        } 
-    }
-]);
+app.use('/', express.static( app.get('public_html') ));
+
+app.get('/', (req, res, next) => {
+    console.log(req.sessionID);
+    if(req.url === '/'){
+        res.render('index', {layout: 'home' });
+    }else{
+        next();
+    } 
+})
+
+app.post('/', (req, res) => {
+   res.json({
+       sessionID: req.sessionID
+   });
+});
 
 app.get('*', function(req, res){
     res.render('index', {layout: '404' });
