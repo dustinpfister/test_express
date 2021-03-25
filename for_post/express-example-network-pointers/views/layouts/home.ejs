@@ -1,13 +1,38 @@
 <h1>Home</h1>
-<textarea id="out" rows="10" cols="60"></textarea>
 
-<script src="/js/http.js"></script>
+<!-- <textarea id="out" rows="10" cols="60"></textarea> -->
+<div id="canvas-app"></div>
+
+
 <script>
 
-var updateInfo = function(res, obj){
+var canvasObj = utils.createCanvas({
+    width: 320,
+    height: 240
+}),
+canvas = canvasObj.canvas,
+ctx = canvasObj.ctx;
+
+
+
+var update = function(res, obj){
    var obj = JSON.parse(res);
+
+   ctx.fillStyle = 'black';
+   ctx.fillRect(0,0, canvas.width, canvas.height);
+
+   ctx.strokeStyle = 'white';
+   ctx.fillStyle = 'blue';
+   Object.keys(obj.pointers).forEach(function(key){
+       var pt = obj.pointers[key];
+       ctx.beginPath();
+       ctx.arc(pt.x, pt.y, 10, 0, Math.PI * 2);
+       ctx.stroke();
+       ctx.fill();
+   });
+
    //document.getElementById('out').value += obj.sessionID + ' : ' + obj.pointer.x + '\n\n';
-   document.getElementById('out').value += Object.keys(obj.pointers).length + '\n\n';
+   //document.getElementById('out').value += Object.keys(obj.pointers).length + '\n\n';
 };
 
 var infoObj = {
@@ -16,7 +41,7 @@ var infoObj = {
 
 // info loop
 var loop = function(){
-    sendObject(infoObj, updateInfo);
+    sendObject(infoObj, update);
     setTimeout(loop, 3000);
 };
 loop();
