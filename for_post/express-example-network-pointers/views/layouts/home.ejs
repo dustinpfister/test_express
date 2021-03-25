@@ -13,9 +13,12 @@ var canvasObj = utils.createCanvas({
 canvas = canvasObj.canvas,
 ctx = canvasObj.ctx;
 
+var save = utils.load('network_pointers', 0);
+save = save || {};
+
 var infoObj = {
     action: 'info',
-    name: 'user_' + (1 + Math.floor(Math.random() * 9998))
+    name: save.name || 'user_' + (1 + Math.floor(Math.random() * 9998))
 };
 
 var update = function(res, obj){
@@ -48,6 +51,10 @@ setName.value = infoObj.name;
 
 setName.addEventListener('change', function(e){
     infoObj.name = e.target.value;
+    var save = {
+        name: infoObj.name
+    };
+    utils.save('network_pointers', 0, save);
 });
 
 </script>
