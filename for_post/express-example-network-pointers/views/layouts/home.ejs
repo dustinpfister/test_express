@@ -13,14 +13,10 @@ var canvasObj = utils.createCanvas({
 canvas = canvasObj.canvas,
 ctx = canvasObj.ctx;
 
-
-
 var update = function(res, obj){
    var obj = JSON.parse(res);
-
    ctx.fillStyle = 'black';
    ctx.fillRect(0,0, canvas.width, canvas.height);
-
    ctx.strokeStyle = 'white';
    ctx.fillStyle = 'blue';
    Object.keys(obj.pointers).forEach(function(key){
@@ -30,7 +26,6 @@ var update = function(res, obj){
        ctx.stroke();
        ctx.fill();
    });
-
    //document.getElementById('out').value += obj.sessionID + ' : ' + obj.pointer.x + '\n\n';
    //document.getElementById('out').value += Object.keys(obj.pointers).length + '\n\n';
 };

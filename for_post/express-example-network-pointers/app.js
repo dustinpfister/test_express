@@ -30,8 +30,8 @@ let pointers = {};
 // create a new pointer
 let createPointer = function(sessionID){
     return pointers[sessionID] = {
-        x: 160,
-        y: 120,
+        x: 10 + Math.random() * 300,
+        y: 10 + Math.random() * 220,
         made: new Date()
     };
 };
