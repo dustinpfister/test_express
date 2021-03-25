@@ -1,6 +1,6 @@
 let express = require('express'),
 path = require('path'),
-app = express(),
+app = express();
  
 // getting port this way
 app.set('port', process.env.PORT || process.argv[2] || 8080 );
