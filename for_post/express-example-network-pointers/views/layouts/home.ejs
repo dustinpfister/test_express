@@ -46,4 +46,8 @@ loop();
 var setName = document.getElementById('set_name');
 setName.value = infoObj.name;
 
+setName.addEventListener('change', function(e){
+    infoObj.name = e.target.value;
+});
+
 </script>
