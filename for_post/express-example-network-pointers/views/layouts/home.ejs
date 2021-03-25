@@ -7,7 +7,7 @@
 var updateInfo = function(res, obj){
    var obj = JSON.parse(res);
    //document.getElementById('out').value += obj.sessionID + ' : ' + obj.pointer.x + '\n\n';
-document.getElementById('out').value += Object.keys(obj.pointers).length + '\n\n';
+   document.getElementById('out').value += Object.keys(obj.pointers).length + '\n\n';
 };
 
 var infoObj = {

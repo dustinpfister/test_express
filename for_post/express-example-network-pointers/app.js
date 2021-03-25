@@ -3,7 +3,8 @@ session = require('express-session'),
 path = require('path'),
 app = express();
 
-app.set('pointer_age', 120);
+// pointer max age in seconds
+app.set('pointer_age', 30);
  
 // getting port this way
 app.set('port', process.env.PORT || process.argv[2] || 8080 );
@@ -23,8 +24,10 @@ app.use(session({
     cookie: {maxAge: app.get('pointer_age') * 1000 }
 }));
 
+// the collection of pointers
 let pointers = {};
 
+// create a new pointer
 let createPointer = function(sessionID){
     return pointers[sessionID] = {
         x: 160,
@@ -42,6 +45,7 @@ let getPointer = function(sessionID){
    return createPointer(sessionID);
 };
 
+// purge old objects
 let purgeOld = () => {
     let now = new Date();
     Object.keys(pointers).forEach((key) => {
@@ -56,6 +60,7 @@ let purgeOld = () => {
 // one main middleware for / using express.static and res.render
 app.use('/', express.static( app.get('public_html') ));
 
+// get request for / and only /
 app.get('/', (req, res, next) => {
     console.log(req.sessionID);
     if(req.url === '/'){
@@ -65,15 +70,13 @@ app.get('/', (req, res, next) => {
     } 
 })
 
+// post requests to /
 app.use('/', express.json());
 app.post('/', (req, res) => {
-
    // purge any old objects
    purgeOld();
-
    // get the pointer for the current session
    var pointer = getPointer(req.sessionID);
-
    res.json({
        pointer: pointer,
        sessionID: req.sessionID,
@@ -82,6 +85,7 @@ app.post('/', (req, res) => {
    });
 });
 
+// 404
 app.get('*', function(req, res){
     res.render('index', {layout: '404' });
 });
