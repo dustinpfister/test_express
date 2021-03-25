@@ -2,6 +2,8 @@ let express = require('express'),
 session = require('express-session'),
 path = require('path'),
 app = express();
+
+app.set('pointer_age', 120);
  
 // getting port this way
 app.set('port', process.env.PORT || process.argv[2] || 8080 );
@@ -18,7 +20,7 @@ app.use(session({
     secret: '1234',
     resave: true,
     saveUninitialized: true,
-    cookie: {maxAge: 30 * 1000 }
+    cookie: {maxAge: app.get('pointer_age') * 1000 }
 }));
 
 let pointers = {};
@@ -45,7 +47,7 @@ let purgeOld = () => {
     Object.keys(pointers).forEach((key) => {
         let pt = pointers[key],
         t = now - pt.made;
-        if(t > 30000){
+        if(t > app.get('pointer_age') * 1000){
             delete pointers[key];
         }
     });
