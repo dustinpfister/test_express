@@ -17,7 +17,7 @@ app.use('/', [
     // if not found render main index, but only for / else next
     function (req, res, next) {
         if(req.url === '/'){
-            res.render('index', {});
+            res.render('index', {layout: 'home' });
         }else{
             next();
         } 
@@ -25,7 +25,7 @@ app.use('/', [
 ]);
 
 app.get('*', function(req, res){
-    res.render('404', {});
+    res.render('index', {layout: '404' });
 });
 
 // listen on the port app setting
