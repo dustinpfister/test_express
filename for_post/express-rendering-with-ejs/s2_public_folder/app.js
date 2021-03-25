@@ -10,10 +10,12 @@ app.set('public_html', path.resolve( __dirname, 'public') );
 app.set('view engine', 'ejs'); // the render engine
 app.set('views', path.resolve( __dirname, 'views') ); // the views folder for the *.ejs files
 
-// a single path for /
+// one main middleware for / using express.static and res.render
 app.use('/', [
+ 
     // use express.static first to look for a static resource
     express.static( app.get('public_html') ),
+ 
     // if not found render main index, but only for / else next
     function (req, res, next) {
         if(req.url === '/'){
