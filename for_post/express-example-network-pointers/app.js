@@ -33,9 +33,11 @@ app.get('/', (req, res, next) => {
     } 
 })
 
+app.use('/', express.json());
 app.post('/', (req, res) => {
    res.json({
-       sessionID: req.sessionID
+       sessionID: req.sessionID,
+       body: req.body
    });
 });
 
