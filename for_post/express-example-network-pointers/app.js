@@ -19,7 +19,39 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     cookie: {maxAge: 30 * 1000 }
-}))
+}));
+
+let pointers = {};
+
+let createPointer = function(sessionID){
+    return pointers[sessionID] = {
+        x: 160,
+        y: 120,
+        made: new Date()
+    };
+};
+
+// get a pointer for the given sessionID,
+// or create and return a new one if not there
+let getPointer = function(sessionID){
+   if(pointers[sessionID]){
+      return pointers[sessionID];
+   }
+   return createPointer(sessionID);
+};
+
+let purgeOld = () => {
+    let now = new Date();
+    Object.keys(pointers).forEach((key) => {
+        let pt = pointers[key],
+        t = now - pt.made;
+        if(t > 30000){
+            delete pointers[key];
+        }
+    });
+};
+
+
 
 // one main middleware for / using express.static and res.render
 app.use('/', express.static( app.get('public_html') ));
@@ -35,8 +67,15 @@ app.get('/', (req, res, next) => {
 
 app.use('/', express.json());
 app.post('/', (req, res) => {
+
+   var pointer = getPointer(req.sessionID);
+
+   purgeOld();
+
    res.json({
+       pointer: pointer,
        sessionID: req.sessionID,
+       pointers: pointers,
        body: req.body
    });
 });

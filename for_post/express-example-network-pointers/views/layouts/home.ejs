@@ -1,11 +1,12 @@
 <h1>Home</h1>
-<textarea id="out"></textarea>
+<textarea id="out" rows="10" cols="60"></textarea>
 
 <script src="/js/http.js"></script>
 <script>
 
 var updateInfo = function(res, obj){
-   document.getElementById('out').value += res;
+   var obj = JSON.parse(res);
+   document.getElementById('out').value += obj.sessionID + ' : ' + obj.pointer.x + '\n\n';
 };
 
 var infoObj = {
