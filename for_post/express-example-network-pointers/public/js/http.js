@@ -1,6 +1,6 @@
 var sendObject = function(obj, done){
     obj = obj || {};
-    obj.action = opt.action || 'info_request';
+    obj.action = obj.action || 'info_request';
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/', true);
     xhr.onreadystatechange = function () {
