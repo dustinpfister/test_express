@@ -62,7 +62,6 @@ app.use('/', express.static( app.get('public_html') ));
 
 // get request for / and only /
 app.get('/', (req, res, next) => {
-    console.log(req.sessionID);
     if(req.url === '/'){
         res.render('index', {layout: 'home' });
     }else{
@@ -72,18 +71,37 @@ app.get('/', (req, res, next) => {
 
 // post requests to /
 app.use('/', express.json());
-app.post('/', (req, res) => {
-   // purge any old objects
-   purgeOld();
-   // get the pointer for the current session
-   var pointer = getPointer(req.sessionID);
-   res.json({
-       pointer: pointer,
-       sessionID: req.sessionID,
-       pointers: pointers,
-       body: req.body
-   });
-});
+app.post('/', [
+    // get pointer
+    (req, res, next) => {
+        // purge any old objects
+        purgeOld();
+        // get the pointer for the current session
+        req.pointer = getPointer(req.sessionID);
+        next();
+    },
+    // if info action
+    (req, res, next) => {
+        if(req.body.action === 'info'){
+           res.json({
+               action: 'info',
+               pointer: req.pointer,
+               sessionID: req.sessionID,
+               pointers: pointers,
+               body: req.body
+           });
+        }else{
+            next();
+        }
+    },
+    // action now known
+    (req, res, next) => {
+        // unkown action
+        res.json({
+               action: 'unkown'
+        });
+    }
+]);
 
 // 404
 app.get('*', function(req, res){
