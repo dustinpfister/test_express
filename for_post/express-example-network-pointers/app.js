@@ -5,6 +5,7 @@ app = express();
 
 // pointer max age in seconds
 app.set('pointer_age', 30);
+app.set('cookie-secret', '1234');
  
 // getting port this way
 app.set('port', process.env.PORT || process.argv[2] || 8080 );
@@ -17,8 +18,8 @@ app.set('views', path.resolve( __dirname, 'views') ); // the views folder for th
 // use express session
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
-    name: '_network_pointer_id',
-    secret: '1234',
+    name: '_network_pointer_session',
+    secret: app.get('cookie-secret'),
     resave: true,
     saveUninitialized: true,
     cookie: {maxAge: app.get('pointer_age') * 1000 }
